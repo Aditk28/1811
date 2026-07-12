@@ -1,0 +1,5 @@
+[console_scripts]
+gamepad_node = teleop_bridge.gamepad_node:main
+keyboard_teleop_node = teleop_bridge.keyboard_teleop_node:main
+serial_bridge_node = teleop_bridge.serial_bridge_node:main
+

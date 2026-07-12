@@ -1,0 +1,6 @@
+pygame
+pyserial
+setuptools
+
+[test]
+pytest

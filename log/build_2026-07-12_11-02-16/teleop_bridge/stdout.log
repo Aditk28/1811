@@ -1,0 +1,45 @@
+running egg_info
+creating ../../../build/teleop_bridge/teleop_bridge.egg-info
+writing ../../../build/teleop_bridge/teleop_bridge.egg-info/PKG-INFO
+writing dependency_links to ../../../build/teleop_bridge/teleop_bridge.egg-info/dependency_links.txt
+writing entry points to ../../../build/teleop_bridge/teleop_bridge.egg-info/entry_points.txt
+writing requirements to ../../../build/teleop_bridge/teleop_bridge.egg-info/requires.txt
+writing top-level names to ../../../build/teleop_bridge/teleop_bridge.egg-info/top_level.txt
+writing manifest file '../../../build/teleop_bridge/teleop_bridge.egg-info/SOURCES.txt'
+reading manifest file '../../../build/teleop_bridge/teleop_bridge.egg-info/SOURCES.txt'
+writing manifest file '../../../build/teleop_bridge/teleop_bridge.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/adit22/1811/build/teleop_bridge/build
+creating /home/adit22/1811/build/teleop_bridge/build/lib
+creating /home/adit22/1811/build/teleop_bridge/build/lib/teleop_bridge
+copying teleop_bridge/serial_bridge_node.py -> /home/adit22/1811/build/teleop_bridge/build/lib/teleop_bridge
+copying teleop_bridge/keyboard_teleop_node.py -> /home/adit22/1811/build/teleop_bridge/build/lib/teleop_bridge
+copying teleop_bridge/__init__.py -> /home/adit22/1811/build/teleop_bridge/build/lib/teleop_bridge
+copying teleop_bridge/gamepad_node.py -> /home/adit22/1811/build/teleop_bridge/build/lib/teleop_bridge
+running install
+running install_lib
+creating /home/adit22/1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge
+copying /home/adit22/1811/build/teleop_bridge/build/lib/teleop_bridge/serial_bridge_node.py -> /home/adit22/1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge
+copying /home/adit22/1811/build/teleop_bridge/build/lib/teleop_bridge/keyboard_teleop_node.py -> /home/adit22/1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge
+copying /home/adit22/1811/build/teleop_bridge/build/lib/teleop_bridge/__init__.py -> /home/adit22/1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge
+copying /home/adit22/1811/build/teleop_bridge/build/lib/teleop_bridge/gamepad_node.py -> /home/adit22/1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge
+byte-compiling /home/adit22/1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge/serial_bridge_node.py to serial_bridge_node.cpython-310.pyc
+byte-compiling /home/adit22/1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge/keyboard_teleop_node.py to keyboard_teleop_node.cpython-310.pyc
+byte-compiling /home/adit22/1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/adit22/1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge/gamepad_node.py to gamepad_node.cpython-310.pyc
+running install_data
+creating /home/adit22/1811/install/teleop_bridge/share/ament_index
+creating /home/adit22/1811/install/teleop_bridge/share/ament_index/resource_index
+creating /home/adit22/1811/install/teleop_bridge/share/ament_index/resource_index/packages
+copying resource/teleop_bridge -> /home/adit22/1811/install/teleop_bridge/share/ament_index/resource_index/packages
+copying package.xml -> /home/adit22/1811/install/teleop_bridge/share/teleop_bridge
+creating /home/adit22/1811/install/teleop_bridge/share/teleop_bridge/launch
+copying launch/teleop_bridge.launch.py -> /home/adit22/1811/install/teleop_bridge/share/teleop_bridge/launch
+running install_egg_info
+Copying ../../../build/teleop_bridge/teleop_bridge.egg-info to /home/adit22/1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge-0.0.0-py3.10.egg-info
+running install_scripts
+Installing gamepad_node script to /home/adit22/1811/install/teleop_bridge/lib/teleop_bridge
+Installing keyboard_teleop_node script to /home/adit22/1811/install/teleop_bridge/lib/teleop_bridge
+Installing serial_bridge_node script to /home/adit22/1811/install/teleop_bridge/lib/teleop_bridge
+writing list of installed files to '/home/adit22/1811/build/teleop_bridge/install.log'
