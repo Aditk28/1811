@@ -93,3 +93,18 @@ source ~/1811/ros2_ws/install/setup.bash
   iteration in earlier versions — if commands start lagging/backing up
   again, check that the drain-all-buffered-lines fix is still in place.
 EOF
+## Running the setup script on a new machine
+
+Once ROS 2 Humble is installed and the repo is cloned:
+
+```bash
+cd ~/1811
+bash scripts/setup_karbon.sh
+```
+
+If it says it added you to the `dialout` group, log out and back in (or
+close/reopen your terminal) before running any serial commands, then:
+
+```bash
+source ~/1811/ros2_ws/install/setup.bash
+```
