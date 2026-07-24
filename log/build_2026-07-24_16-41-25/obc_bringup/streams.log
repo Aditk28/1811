@@ -1,0 +1,42 @@
+[0.021s] Invoking command in '/vehicle_1811/build/obc_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/obc_bringup -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/obc_bringup
+[0.062s] -- The C compiler identification is GNU 11.4.0
+[0.103s] -- The CXX compiler identification is GNU 11.4.0
+[0.109s] -- Detecting C compiler ABI info
+[0.158s] -- Detecting C compiler ABI info - done
+[0.163s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.163s] -- Detecting C compile features
+[0.164s] -- Detecting C compile features - done
+[0.165s] -- Detecting CXX compiler ABI info
+[0.229s] -- Detecting CXX compiler ABI info - done
+[0.233s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.234s] -- Detecting CXX compile features
+[0.234s] -- Detecting CXX compile features - done
+[0.236s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.316s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.407s] -- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.466s] -- Added test 'lint_cmake' to check CMake code style
+[0.467s] -- Added test 'xmllint' to check XML markup files
+[0.469s] -- Configuring done
+[0.474s] -- Generating done
+[0.476s] -- Build files have been written to: /vehicle_1811/build/obc_bringup
+[0.483s] Invoked command in '/vehicle_1811/build/obc_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/obc_bringup -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/obc_bringup
+[0.484s] Invoking command in '/vehicle_1811/build/obc_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/obc_bringup -- -j24 -l24
+[0.516s] Invoked command in '/vehicle_1811/build/obc_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/obc_bringup -- -j24 -l24
+[0.518s] Invoking command in '/vehicle_1811/build/obc_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/obc_bringup
+[0.536s] -- Install configuration: ""
+[0.536s] -- Installing: /vehicle_1811/install/obc_bringup/share/ament_index/resource_index/package_run_dependencies/obc_bringup
+[0.536s] -- Installing: /vehicle_1811/install/obc_bringup/share/ament_index/resource_index/parent_prefix_path/obc_bringup
+[0.537s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/environment/ament_prefix_path.sh
+[0.537s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/environment/ament_prefix_path.dsv
+[0.537s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/environment/path.sh
+[0.537s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/environment/path.dsv
+[0.537s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/local_setup.bash
+[0.538s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/local_setup.sh
+[0.538s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/local_setup.zsh
+[0.538s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/local_setup.dsv
+[0.538s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/package.dsv
+[0.538s] -- Installing: /vehicle_1811/install/obc_bringup/share/ament_index/resource_index/packages/obc_bringup
+[0.539s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/cmake/obc_bringupConfig.cmake
+[0.540s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/cmake/obc_bringupConfig-version.cmake
+[0.540s] -- Installing: /vehicle_1811/install/obc_bringup/share/obc_bringup/package.xml
+[0.540s] Invoked command in '/vehicle_1811/build/obc_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/obc_bringup

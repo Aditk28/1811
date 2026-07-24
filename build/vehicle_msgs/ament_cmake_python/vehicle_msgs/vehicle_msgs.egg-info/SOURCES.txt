@@ -1,0 +1,6 @@
+setup.py
+vehicle_msgs/__init__.py
+vehicle_msgs.egg-info/PKG-INFO
+vehicle_msgs.egg-info/SOURCES.txt
+vehicle_msgs.egg-info/dependency_links.txt
+vehicle_msgs.egg-info/top_level.txt

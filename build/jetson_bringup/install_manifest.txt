@@ -1,0 +1,15 @@
+/vehicle_1811/install/jetson_bringup/share/ament_index/resource_index/package_run_dependencies/jetson_bringup
+/vehicle_1811/install/jetson_bringup/share/ament_index/resource_index/parent_prefix_path/jetson_bringup
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/environment/ament_prefix_path.sh
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/environment/ament_prefix_path.dsv
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/environment/path.sh
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/environment/path.dsv
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/local_setup.bash
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/local_setup.sh
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/local_setup.zsh
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/local_setup.dsv
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.dsv
+/vehicle_1811/install/jetson_bringup/share/ament_index/resource_index/packages/jetson_bringup
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/cmake/jetson_bringupConfig.cmake
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/cmake/jetson_bringupConfig-version.cmake
+/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.xml

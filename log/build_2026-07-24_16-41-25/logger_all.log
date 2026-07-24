@@ -1,0 +1,578 @@
+[0.078s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.078s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=24, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x75f3353fdc90>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x75f3353fd210>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x75f3353fd210>>, mixin_verb=('build',))
+[0.143s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.143s] INFO:colcon.colcon_metadata.package_discovery.colcon_meta:Using configuration from '/root/.colcon/metadata/default/Gazebo.meta'
+[0.143s] INFO:colcon.colcon_metadata.package_discovery.colcon_meta:Using configuration from '/root/.colcon/metadata/default/fastdds.meta'
+[0.144s] INFO:colcon.colcon_metadata.package_discovery.colcon_meta:Using configuration from '/root/.colcon/metadata/default/fastrtps.meta'
+[0.144s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.144s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.144s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.144s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.144s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.144s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/vehicle_1811'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.145s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['ignore', 'ignore_ament_install']
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'ignore'
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'ignore_ament_install'
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['colcon_pkg']
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'colcon_pkg'
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['colcon_meta']
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'colcon_meta'
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['ros']
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'ros'
+[0.152s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['cmake', 'python']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'cmake'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'python'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['python_setup_py']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'python_setup_py'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['ignore', 'ignore_ament_install']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'ignore'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'ignore_ament_install'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['colcon_pkg']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'colcon_pkg'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['colcon_meta']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'colcon_meta'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['ros']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'ros'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['cmake', 'python']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'cmake'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'python'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['python_setup_py']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'python_setup_py'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['ignore', 'ignore_ament_install']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'ignore'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'ignore_ament_install'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['colcon_pkg']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'colcon_pkg'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['colcon_meta']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'colcon_meta'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['ros']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'ros'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['cmake', 'python']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'cmake'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'python'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['python_setup_py']
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'python_setup_py'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['ignore', 'ignore_ament_install']
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'ignore'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'ignore_ament_install'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['colcon_pkg']
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'colcon_pkg'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['colcon_meta']
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'colcon_meta'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['ros']
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'ros'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['cmake', 'python']
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'cmake'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'python'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['python_setup_py']
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'python_setup_py'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['ignore', 'ignore_ament_install']
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ignore'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ignore_ament_install'
+[0.154s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['colcon_pkg']
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'colcon_pkg'
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['colcon_meta']
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'colcon_meta'
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['ros']
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ros'
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['cmake', 'python']
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'cmake'
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'python'
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['python_setup_py']
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'python_setup_py'
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['ignore', 'ignore_ament_install']
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'ignore'
+[0.155s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'ignore_ament_install'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['colcon_pkg']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'colcon_pkg'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['colcon_meta']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'colcon_meta'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['ros']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'ros'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['cmake', 'python']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'cmake'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'python'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['python_setup_py']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'python_setup_py'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/build) by extensions ['ignore', 'ignore_ament_install']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/build) by extension 'ignore'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/build) ignored
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/install) by extensions ['ignore', 'ignore_ament_install']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/install) by extension 'ignore'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/install) ignored
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/log) by extensions ['ignore', 'ignore_ament_install']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/log) by extension 'ignore'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/log) ignored
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['ignore', 'ignore_ament_install']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'ignore'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'ignore_ament_install'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['colcon_pkg']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'colcon_pkg'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['colcon_meta']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'colcon_meta'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['ros']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'ros'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['cmake', 'python']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'cmake'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'python'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['python_setup_py']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'python_setup_py'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extensions ['ignore', 'ignore_ament_install']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extension 'ignore'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extension 'ignore_ament_install'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extensions ['colcon_pkg']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extension 'colcon_pkg'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extensions ['colcon_meta']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extension 'colcon_meta'
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extensions ['ros']
+[0.156s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extension 'ros'
+[0.159s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/camera_perception' with type 'ros.ament_python' and name 'camera_perception'
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extension 'ignore'
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extension 'ignore_ament_install'
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extensions ['colcon_pkg']
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extension 'colcon_pkg'
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extensions ['colcon_meta']
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extension 'colcon_meta'
+[0.160s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extensions ['ros']
+[0.160s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extension 'ros'
+[0.160s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/jetson_bringup' with type 'ros.ament_cmake' and name 'jetson_bringup'
+[0.160s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extensions ['ignore', 'ignore_ament_install']
+[0.160s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extension 'ignore'
+[0.160s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extension 'ignore_ament_install'
+[0.161s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extensions ['colcon_pkg']
+[0.161s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extension 'colcon_pkg'
+[0.161s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extensions ['colcon_meta']
+[0.161s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extension 'colcon_meta'
+[0.161s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extensions ['ros']
+[0.161s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extension 'ros'
+[0.162s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/lidar_perception' with type 'ros.ament_cmake' and name 'lidar_perception'
+[0.163s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.163s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extension 'ignore'
+[0.163s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extension 'ignore_ament_install'
+[0.163s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extensions ['colcon_pkg']
+[0.163s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extension 'colcon_pkg'
+[0.163s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extensions ['colcon_meta']
+[0.163s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extension 'colcon_meta'
+[0.163s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extensions ['ros']
+[0.163s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extension 'ros'
+[0.164s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/obc_bringup' with type 'ros.ament_cmake' and name 'obc_bringup'
+[0.164s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extensions ['ignore', 'ignore_ament_install']
+[0.164s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extension 'ignore'
+[0.164s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extension 'ignore_ament_install'
+[0.164s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extensions ['colcon_pkg']
+[0.164s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extension 'colcon_pkg'
+[0.164s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extensions ['colcon_meta']
+[0.164s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extension 'colcon_meta'
+[0.164s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extensions ['ros']
+[0.164s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extension 'ros'
+[0.165s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/sensor_fusion' with type 'ros.ament_python' and name 'sensor_fusion'
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extensions ['ignore', 'ignore_ament_install']
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extension 'ignore'
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extension 'ignore_ament_install'
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extensions ['colcon_pkg']
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extension 'colcon_pkg'
+[0.166s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extensions ['colcon_meta']
+[0.166s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extension 'colcon_meta'
+[0.166s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extensions ['ros']
+[0.166s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extension 'ros'
+[0.166s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/teleop_bridge' with type 'ros.ament_python' and name 'teleop_bridge'
+[0.166s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.166s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extension 'ignore'
+[0.166s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extension 'ignore_ament_install'
+[0.166s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extensions ['colcon_pkg']
+[0.167s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extension 'colcon_pkg'
+[0.167s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extensions ['colcon_meta']
+[0.167s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extension 'colcon_meta'
+[0.167s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extensions ['ros']
+[0.167s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extension 'ros'
+[0.167s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/vehicle_msgs' with type 'ros.ament_cmake' and name 'vehicle_msgs'
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['ignore', 'ignore_ament_install']
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ignore'
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ignore_ament_install'
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['colcon_pkg']
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'colcon_pkg'
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['colcon_meta']
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'colcon_meta'
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['ros']
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ros'
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['cmake', 'python']
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'cmake'
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'python'
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['python_setup_py']
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'python_setup_py'
+[0.168s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.168s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.168s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.168s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.168s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_args' from command line to 'None'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_target' from command line to 'None'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.185s] DEBUG:colcon.colcon_core.verb:Building package 'jetson_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/vehicle_1811/build/jetson_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/vehicle_1811/install/jetson_bringup', 'merge_install': False, 'path': '/vehicle_1811/ros2_ws/src/jetson_bringup', 'symlink_install': False, 'test_result_base': None}
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_args' from command line to 'None'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_target' from command line to 'None'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.185s] DEBUG:colcon.colcon_core.verb:Building package 'obc_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/vehicle_1811/build/obc_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/vehicle_1811/install/obc_bringup', 'merge_install': False, 'path': '/vehicle_1811/ros2_ws/src/obc_bringup', 'symlink_install': False, 'test_result_base': None}
+[0.185s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_args' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_target' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.186s] DEBUG:colcon.colcon_core.verb:Building package 'vehicle_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/vehicle_1811/build/vehicle_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/vehicle_1811/install/vehicle_msgs', 'merge_install': False, 'path': '/vehicle_1811/ros2_ws/src/vehicle_msgs', 'symlink_install': False, 'test_result_base': None}
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_args' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_target' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_clean_cache' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_clean_first' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_force_configure' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'ament_cmake_args' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'catkin_cmake_args' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.186s] DEBUG:colcon.colcon_core.verb:Building package 'camera_perception' with the following arguments: {'ament_cmake_args': None, 'build_base': '/vehicle_1811/build/camera_perception', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/vehicle_1811/install/camera_perception', 'merge_install': False, 'path': '/vehicle_1811/ros2_ws/src/camera_perception', 'symlink_install': False, 'test_result_base': None}
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_args' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_target' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_clean_cache' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_clean_first' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_force_configure' from command line to 'False'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'ament_cmake_args' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'catkin_cmake_args' from command line to 'None'
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.186s] DEBUG:colcon.colcon_core.verb:Building package 'lidar_perception' with the following arguments: {'ament_cmake_args': None, 'build_base': '/vehicle_1811/build/lidar_perception', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/vehicle_1811/install/lidar_perception', 'merge_install': False, 'path': '/vehicle_1811/ros2_ws/src/lidar_perception', 'symlink_install': False, 'test_result_base': None}
+[0.186s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_args' from command line to 'None'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_target' from command line to 'None'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_clean_cache' from command line to 'False'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_clean_first' from command line to 'False'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_force_configure' from command line to 'False'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'ament_cmake_args' from command line to 'None'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'catkin_cmake_args' from command line to 'None'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.187s] DEBUG:colcon.colcon_core.verb:Building package 'sensor_fusion' with the following arguments: {'ament_cmake_args': None, 'build_base': '/vehicle_1811/build/sensor_fusion', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/vehicle_1811/install/sensor_fusion', 'merge_install': False, 'path': '/vehicle_1811/ros2_ws/src/sensor_fusion', 'symlink_install': False, 'test_result_base': None}
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_args' from command line to 'None'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_target' from command line to 'None'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_clean_cache' from command line to 'False'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_clean_first' from command line to 'False'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_force_configure' from command line to 'False'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'ament_cmake_args' from command line to 'None'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'catkin_cmake_args' from command line to 'None'
+[0.187s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.187s] DEBUG:colcon.colcon_core.verb:Building package 'teleop_bridge' with the following arguments: {'ament_cmake_args': None, 'build_base': '/vehicle_1811/build/teleop_bridge', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/vehicle_1811/install/teleop_bridge', 'merge_install': False, 'path': '/vehicle_1811/ros2_ws/src/teleop_bridge', 'symlink_install': False, 'test_result_base': None}
+[0.187s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.188s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.188s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/vehicle_1811/ros2_ws/src/vehicle_msgs' with build type 'ament_cmake'
+[0.188s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/vehicle_1811/ros2_ws/src/vehicle_msgs'
+[0.191s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.191s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.191s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.195s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/vehicle_1811/ros2_ws/src/jetson_bringup' with build type 'ament_cmake'
+[0.195s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/vehicle_1811/ros2_ws/src/jetson_bringup'
+[0.195s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.195s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.198s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/vehicle_1811/ros2_ws/src/obc_bringup' with build type 'ament_cmake'
+[0.198s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/vehicle_1811/ros2_ws/src/obc_bringup'
+[0.198s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.199s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.207s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/build/vehicle_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/vehicle_msgs -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/vehicle_msgs
+[0.215s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/build/jetson_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/jetson_bringup -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/jetson_bringup
+[0.219s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/build/obc_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/obc_bringup -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/obc_bringup
+[0.657s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/build/jetson_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/jetson_bringup -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/jetson_bringup
+[0.658s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/build/jetson_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/jetson_bringup -- -j24 -l24
+[0.682s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/build/obc_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/obc_bringup -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/obc_bringup
+[0.682s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/build/obc_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/obc_bringup -- -j24 -l24
+[0.691s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/build/jetson_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/jetson_bringup -- -j24 -l24
+[0.701s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/build/jetson_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/jetson_bringup
+[0.715s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/build/obc_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/obc_bringup -- -j24 -l24
+[0.716s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/build/obc_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/obc_bringup
+[0.717s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(jetson_bringup)
+[0.717s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/build/jetson_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/jetson_bringup
+[0.719s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup' for CMake module files
+[0.719s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup' for CMake config files
+[0.720s] Level 1:colcon.colcon_core.shell:create_environment_hook('jetson_bringup', 'cmake_prefix_path')
+[0.720s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.ps1'
+[0.720s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.dsv'
+[0.721s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.sh'
+[0.722s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup/bin'
+[0.722s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup/lib/pkgconfig/jetson_bringup.pc'
+[0.723s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup/lib/python3.10/site-packages'
+[0.723s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup/bin'
+[0.723s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.ps1'
+[0.724s] INFO:colcon.colcon_core.shell:Creating package descriptor '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.dsv'
+[0.724s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.sh'
+[0.725s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.bash'
+[0.726s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.zsh'
+[0.726s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/vehicle_1811/install/jetson_bringup/share/colcon-core/packages/jetson_bringup)
+[0.727s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(jetson_bringup)
+[0.727s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup' for CMake module files
+[0.727s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup' for CMake config files
+[0.727s] Level 1:colcon.colcon_core.shell:create_environment_hook('jetson_bringup', 'cmake_prefix_path')
+[0.728s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.ps1'
+[0.728s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.dsv'
+[0.728s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.sh'
+[0.728s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup/bin'
+[0.728s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup/lib/pkgconfig/jetson_bringup.pc'
+[0.729s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup/lib/python3.10/site-packages'
+[0.729s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/jetson_bringup/bin'
+[0.729s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.ps1'
+[0.730s] INFO:colcon.colcon_core.shell:Creating package descriptor '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.dsv'
+[0.730s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.sh'
+[0.730s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.bash'
+[0.731s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/jetson_bringup/share/jetson_bringup/package.zsh'
+[0.731s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/vehicle_1811/install/jetson_bringup/share/colcon-core/packages/jetson_bringup)
+[0.733s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(obc_bringup)
+[0.734s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup' for CMake module files
+[0.736s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup' for CMake config files
+[0.737s] Level 1:colcon.colcon_core.shell:create_environment_hook('obc_bringup', 'cmake_prefix_path')
+[0.738s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.ps1'
+[0.739s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/build/obc_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/obc_bringup
+[0.739s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.dsv'
+[0.739s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.sh'
+[0.739s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup/bin'
+[0.740s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup/lib/pkgconfig/obc_bringup.pc'
+[0.740s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup/lib/python3.10/site-packages'
+[0.740s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup/bin'
+[0.740s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/obc_bringup/share/obc_bringup/package.ps1'
+[0.740s] INFO:colcon.colcon_core.shell:Creating package descriptor '/vehicle_1811/install/obc_bringup/share/obc_bringup/package.dsv'
+[0.741s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/obc_bringup/share/obc_bringup/package.sh'
+[0.741s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/obc_bringup/share/obc_bringup/package.bash'
+[0.741s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/obc_bringup/share/obc_bringup/package.zsh'
+[0.742s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/vehicle_1811/install/obc_bringup/share/colcon-core/packages/obc_bringup)
+[0.742s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(obc_bringup)
+[0.742s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup' for CMake module files
+[0.743s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup' for CMake config files
+[0.743s] Level 1:colcon.colcon_core.shell:create_environment_hook('obc_bringup', 'cmake_prefix_path')
+[0.743s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.ps1'
+[0.743s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.dsv'
+[0.743s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.sh'
+[0.744s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup/bin'
+[0.744s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup/lib/pkgconfig/obc_bringup.pc'
+[0.744s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup/lib/python3.10/site-packages'
+[0.744s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/obc_bringup/bin'
+[0.744s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/obc_bringup/share/obc_bringup/package.ps1'
+[0.745s] INFO:colcon.colcon_core.shell:Creating package descriptor '/vehicle_1811/install/obc_bringup/share/obc_bringup/package.dsv'
+[0.745s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/obc_bringup/share/obc_bringup/package.sh'
+[0.746s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/obc_bringup/share/obc_bringup/package.bash'
+[0.746s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/obc_bringup/share/obc_bringup/package.zsh'
+[0.746s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/vehicle_1811/install/obc_bringup/share/colcon-core/packages/obc_bringup)
+[1.370s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/build/vehicle_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/vehicle_msgs -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/vehicle_msgs
+[1.372s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/build/vehicle_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/vehicle_msgs -- -j24 -l24
+[3.617s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/build/vehicle_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/vehicle_msgs -- -j24 -l24
+[3.618s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/build/vehicle_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/vehicle_msgs
+[3.697s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(vehicle_msgs)
+[3.698s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs' for CMake module files
+[3.698s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/build/vehicle_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/vehicle_msgs
+[3.699s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs' for CMake config files
+[3.699s] Level 1:colcon.colcon_core.shell:create_environment_hook('vehicle_msgs', 'cmake_prefix_path')
+[3.699s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.ps1'
+[3.700s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.dsv'
+[3.700s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.sh'
+[3.701s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs/lib'
+[3.701s] Level 1:colcon.colcon_core.shell:create_environment_hook('vehicle_msgs', 'ld_library_path_lib')
+[3.701s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.ps1'
+[3.701s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.dsv'
+[3.702s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.sh'
+[3.702s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs/bin'
+[3.702s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs/lib/pkgconfig/vehicle_msgs.pc'
+[3.702s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs/lib/python3.10/site-packages'
+[3.703s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs/bin'
+[3.703s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/package.ps1'
+[3.703s] INFO:colcon.colcon_core.shell:Creating package descriptor '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/package.dsv'
+[3.704s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/package.sh'
+[3.705s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/package.bash'
+[3.705s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/package.zsh'
+[3.706s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/vehicle_1811/install/vehicle_msgs/share/colcon-core/packages/vehicle_msgs)
+[3.707s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(vehicle_msgs)
+[3.707s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs' for CMake module files
+[3.707s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs' for CMake config files
+[3.707s] Level 1:colcon.colcon_core.shell:create_environment_hook('vehicle_msgs', 'cmake_prefix_path')
+[3.707s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.ps1'
+[3.708s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.dsv'
+[3.708s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.sh'
+[3.709s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs/lib'
+[3.709s] Level 1:colcon.colcon_core.shell:create_environment_hook('vehicle_msgs', 'ld_library_path_lib')
+[3.709s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.ps1'
+[3.710s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.dsv'
+[3.710s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.sh'
+[3.710s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs/bin'
+[3.710s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs/lib/pkgconfig/vehicle_msgs.pc'
+[3.711s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs/lib/python3.10/site-packages'
+[3.711s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/vehicle_msgs/bin'
+[3.711s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/package.ps1'
+[3.712s] INFO:colcon.colcon_core.shell:Creating package descriptor '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/package.dsv'
+[3.712s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/package.sh'
+[3.713s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/package.bash'
+[3.713s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/vehicle_msgs/share/vehicle_msgs/package.zsh'
+[3.714s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/vehicle_1811/install/vehicle_msgs/share/colcon-core/packages/vehicle_msgs)
+[3.714s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/vehicle_1811/ros2_ws/src/camera_perception' with build type 'ament_python'
+[3.714s] Level 1:colcon.colcon_core.shell:create_environment_hook('camera_perception', 'ament_prefix_path')
+[3.715s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/camera_perception/share/camera_perception/hook/ament_prefix_path.ps1'
+[3.717s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/camera_perception/share/camera_perception/hook/ament_prefix_path.dsv'
+[3.717s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/camera_perception/share/camera_perception/hook/ament_prefix_path.sh'
+[3.717s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.718s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.719s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/vehicle_1811/ros2_ws/src/lidar_perception' with build type 'ament_cmake'
+[3.720s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/vehicle_1811/ros2_ws/src/lidar_perception'
+[3.720s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.720s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.723s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/vehicle_1811/ros2_ws/src/sensor_fusion' with build type 'ament_python'
+[3.723s] Level 1:colcon.colcon_core.shell:create_environment_hook('sensor_fusion', 'ament_prefix_path')
+[3.724s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/hook/ament_prefix_path.ps1'
+[3.725s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/hook/ament_prefix_path.dsv'
+[3.726s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/hook/ament_prefix_path.sh'
+[3.727s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.727s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.730s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/vehicle_1811/ros2_ws/src/teleop_bridge' with build type 'ament_python'
+[3.732s] Level 1:colcon.colcon_core.shell:create_environment_hook('teleop_bridge', 'ament_prefix_path')
+[3.732s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/hook/ament_prefix_path.ps1'
+[3.733s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/hook/ament_prefix_path.dsv'
+[3.733s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/hook/ament_prefix_path.sh'
+[3.735s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.735s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.928s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/vehicle_1811/ros2_ws/src/camera_perception'
+[3.929s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.929s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.937s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/build/lidar_perception': AMENT_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:/opt/ros/humble LD_LIBRARY_PATH=/vehicle_1811/install/vehicle_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/vehicle_1811/install/vehicle_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /vehicle_1811/ros2_ws/src/lidar_perception -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/lidar_perception
+[4.081s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/vehicle_1811/ros2_ws/src/sensor_fusion'
+[4.081s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.081s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.230s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/vehicle_1811/ros2_ws/src/teleop_bridge'
+[4.230s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.230s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.545s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: bdist_rpm, test, install_scripts, check, upload_docs, clean, egg_info, alias, bdist_wheel, build_scripts, build_py, install_egg_info, bdist, install_lib, saveopts, build_clib, register, install_headers, install_data, rotate, sdist, develop, install, symlink_data, easy_install, build_ext, build, bdist_dumb, bdist_egg, upload, dist_info, setopt
+[4.554s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: bdist_rpm, test, install_scripts, check, upload_docs, clean, egg_info, alias, bdist_wheel, build_scripts, build_py, install_egg_info, bdist, install_lib, saveopts, build_clib, register, install_headers, install_data, rotate, sdist, develop, install, symlink_data, easy_install, build_ext, build, bdist_dumb, bdist_egg, upload, dist_info, setopt
+[4.554s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/ros2_ws/src/sensor_fusion': AMENT_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs LD_LIBRARY_PATH=/vehicle_1811/install/vehicle_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/vehicle_1811/build/sensor_fusion/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/vehicle_1811/install/sensor_fusion/lib/python3.10/site-packages:/vehicle_1811/install/vehicle_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/sensor_fusion build --build-base /vehicle_1811/build/sensor_fusion/build install --record /vehicle_1811/build/sensor_fusion/install.log --install-scripts $base/lib/sensor_fusion --single-version-externally-managed install_data
+[4.558s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: bdist_rpm, test, install_scripts, check, upload_docs, clean, egg_info, alias, bdist_wheel, build_scripts, build_py, install_egg_info, bdist, install_lib, saveopts, build_clib, register, install_headers, install_data, rotate, sdist, develop, install, symlink_data, easy_install, build_ext, build, bdist_dumb, bdist_egg, upload, dist_info, setopt
+[4.568s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/ros2_ws/src/camera_perception': AMENT_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs LD_LIBRARY_PATH=/vehicle_1811/install/vehicle_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/vehicle_1811/build/camera_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/vehicle_1811/install/camera_perception/lib/python3.10/site-packages:/vehicle_1811/install/vehicle_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/camera_perception build --build-base /vehicle_1811/build/camera_perception/build install --record /vehicle_1811/build/camera_perception/install.log --install-scripts $base/lib/camera_perception --single-version-externally-managed install_data
+[4.570s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/vehicle_1811/ros2_ws/src/teleop_bridge': AMENT_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs LD_LIBRARY_PATH=/vehicle_1811/install/vehicle_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/vehicle_1811/build/teleop_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/vehicle_1811/install/teleop_bridge/lib/python3.10/site-packages:/vehicle_1811/install/vehicle_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/teleop_bridge build --build-base /vehicle_1811/build/teleop_bridge/build install --record /vehicle_1811/build/teleop_bridge/install.log --install-scripts $base/lib/teleop_bridge --single-version-externally-managed install_data
+[4.812s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/sensor_fusion' for CMake module files
+[4.813s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/ros2_ws/src/sensor_fusion' returned '0': AMENT_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs LD_LIBRARY_PATH=/vehicle_1811/install/vehicle_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/vehicle_1811/build/sensor_fusion/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/vehicle_1811/install/sensor_fusion/lib/python3.10/site-packages:/vehicle_1811/install/vehicle_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/sensor_fusion build --build-base /vehicle_1811/build/sensor_fusion/build install --record /vehicle_1811/build/sensor_fusion/install.log --install-scripts $base/lib/sensor_fusion --single-version-externally-managed install_data
+[4.814s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/sensor_fusion' for CMake config files
+[4.816s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/sensor_fusion/lib'
+[4.816s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/sensor_fusion/bin'
+[4.816s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/sensor_fusion/lib/pkgconfig/sensor_fusion.pc'
+[4.817s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/sensor_fusion/lib/python3.10/site-packages'
+[4.818s] Level 1:colcon.colcon_core.shell:create_environment_hook('sensor_fusion', 'pythonpath')
+[4.818s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/hook/pythonpath.ps1'
+[4.820s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/hook/pythonpath.dsv'
+[4.821s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/hook/pythonpath.sh'
+[4.823s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/sensor_fusion/bin'
+[4.823s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(sensor_fusion)
+[4.823s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/package.ps1'
+[4.824s] INFO:colcon.colcon_core.shell:Creating package descriptor '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/package.dsv'
+[4.826s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/package.sh'
+[4.829s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/package.bash'
+[4.831s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/sensor_fusion/share/sensor_fusion/package.zsh'
+[4.832s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/vehicle_1811/install/sensor_fusion/share/colcon-core/packages/sensor_fusion)
+[4.837s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/camera_perception' for CMake module files
+[4.838s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/ros2_ws/src/camera_perception' returned '0': AMENT_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs LD_LIBRARY_PATH=/vehicle_1811/install/vehicle_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/vehicle_1811/build/camera_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/vehicle_1811/install/camera_perception/lib/python3.10/site-packages:/vehicle_1811/install/vehicle_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/camera_perception build --build-base /vehicle_1811/build/camera_perception/build install --record /vehicle_1811/build/camera_perception/install.log --install-scripts $base/lib/camera_perception --single-version-externally-managed install_data
+[4.838s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/camera_perception' for CMake config files
+[4.839s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/camera_perception/lib'
+[4.839s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/camera_perception/bin'
+[4.839s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/camera_perception/lib/pkgconfig/camera_perception.pc'
+[4.839s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/camera_perception/lib/python3.10/site-packages'
+[4.839s] Level 1:colcon.colcon_core.shell:create_environment_hook('camera_perception', 'pythonpath')
+[4.839s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/camera_perception/share/camera_perception/hook/pythonpath.ps1'
+[4.840s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/camera_perception/share/camera_perception/hook/pythonpath.dsv'
+[4.840s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/camera_perception/share/camera_perception/hook/pythonpath.sh'
+[4.841s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/camera_perception/bin'
+[4.841s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(camera_perception)
+[4.841s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/camera_perception/share/camera_perception/package.ps1'
+[4.842s] INFO:colcon.colcon_core.shell:Creating package descriptor '/vehicle_1811/install/camera_perception/share/camera_perception/package.dsv'
+[4.843s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/camera_perception/share/camera_perception/package.sh'
+[4.843s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/camera_perception/share/camera_perception/package.bash'
+[4.844s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/camera_perception/share/camera_perception/package.zsh'
+[4.844s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/vehicle_1811/install/camera_perception/share/colcon-core/packages/camera_perception)
+[4.846s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/teleop_bridge' for CMake module files
+[4.847s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/ros2_ws/src/teleop_bridge' returned '0': AMENT_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs LD_LIBRARY_PATH=/vehicle_1811/install/vehicle_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/vehicle_1811/build/teleop_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/vehicle_1811/install/teleop_bridge/lib/python3.10/site-packages:/vehicle_1811/install/vehicle_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/teleop_bridge build --build-base /vehicle_1811/build/teleop_bridge/build install --record /vehicle_1811/build/teleop_bridge/install.log --install-scripts $base/lib/teleop_bridge --single-version-externally-managed install_data
+[4.848s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/teleop_bridge' for CMake config files
+[4.848s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/teleop_bridge/lib'
+[4.848s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/teleop_bridge/bin'
+[4.848s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/teleop_bridge/lib/pkgconfig/teleop_bridge.pc'
+[4.849s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/teleop_bridge/lib/python3.10/site-packages'
+[4.849s] Level 1:colcon.colcon_core.shell:create_environment_hook('teleop_bridge', 'pythonpath')
+[4.849s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/hook/pythonpath.ps1'
+[4.849s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/hook/pythonpath.dsv'
+[4.850s] INFO:colcon.colcon_core.shell:Creating environment hook '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/hook/pythonpath.sh'
+[4.851s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/teleop_bridge/bin'
+[4.851s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(teleop_bridge)
+[4.851s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/package.ps1'
+[4.853s] INFO:colcon.colcon_core.shell:Creating package descriptor '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/package.dsv'
+[4.853s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/package.sh'
+[4.853s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/package.bash'
+[4.854s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/teleop_bridge/share/teleop_bridge/package.zsh'
+[4.854s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/vehicle_1811/install/teleop_bridge/share/colcon-core/packages/teleop_bridge)
+[4.990s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/vehicle_1811/build/lidar_perception' returned '1': AMENT_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:/opt/ros/humble LD_LIBRARY_PATH=/vehicle_1811/install/vehicle_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/vehicle_1811/install/vehicle_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /vehicle_1811/ros2_ws/src/lidar_perception -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/lidar_perception
+[5.002s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(lidar_perception)
+[5.002s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/lidar_perception' for CMake module files
+[5.002s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/lidar_perception' for CMake config files
+[5.002s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/lidar_perception/bin'
+[5.002s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/lidar_perception/lib/pkgconfig/lidar_perception.pc'
+[5.003s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/lidar_perception/lib/python3.10/site-packages'
+[5.003s] Level 1:colcon.colcon_core.environment:checking '/vehicle_1811/install/lidar_perception/bin'
+[5.003s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/lidar_perception/share/lidar_perception/package.ps1'
+[5.004s] INFO:colcon.colcon_core.shell:Creating package descriptor '/vehicle_1811/install/lidar_perception/share/lidar_perception/package.dsv'
+[5.005s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/lidar_perception/share/lidar_perception/package.sh'
+[5.005s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/lidar_perception/share/lidar_perception/package.bash'
+[5.005s] INFO:colcon.colcon_core.shell:Creating package script '/vehicle_1811/install/lidar_perception/share/lidar_perception/package.zsh'
+[5.006s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/vehicle_1811/install/lidar_perception/share/colcon-core/packages/lidar_perception)
+[5.017s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[5.017s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[5.018s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '1'
+[5.018s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[5.043s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[5.043s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[5.043s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[5.043s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[5.043s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.NotSupported: Unable to autolaunch a dbus-daemon without a $DISPLAY for X11
+[5.044s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[5.044s] INFO:colcon.colcon_core.shell:Creating prefix script '/vehicle_1811/install/local_setup.ps1'
+[5.045s] INFO:colcon.colcon_core.shell:Creating prefix util module '/vehicle_1811/install/_local_setup_util_ps1.py'
+[5.046s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/vehicle_1811/install/setup.ps1'
+[5.046s] INFO:colcon.colcon_core.shell:Creating prefix script '/vehicle_1811/install/local_setup.sh'
+[5.047s] INFO:colcon.colcon_core.shell:Creating prefix util module '/vehicle_1811/install/_local_setup_util_sh.py'
+[5.048s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/vehicle_1811/install/setup.sh'
+[5.048s] INFO:colcon.colcon_core.shell:Creating prefix script '/vehicle_1811/install/local_setup.bash'
+[5.049s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/vehicle_1811/install/setup.bash'
+[5.050s] INFO:colcon.colcon_core.shell:Creating prefix script '/vehicle_1811/install/local_setup.zsh'
+[5.050s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/vehicle_1811/install/setup.zsh'

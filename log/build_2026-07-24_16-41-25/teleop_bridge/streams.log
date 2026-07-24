@@ -1,0 +1,23 @@
+[0.840s] Invoking command in '/vehicle_1811/ros2_ws/src/teleop_bridge': AMENT_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs LD_LIBRARY_PATH=/vehicle_1811/install/vehicle_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/vehicle_1811/build/teleop_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/vehicle_1811/install/teleop_bridge/lib/python3.10/site-packages:/vehicle_1811/install/vehicle_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/teleop_bridge build --build-base /vehicle_1811/build/teleop_bridge/build install --record /vehicle_1811/build/teleop_bridge/install.log --install-scripts $base/lib/teleop_bridge --single-version-externally-managed install_data
+[1.024s] running egg_info
+[1.025s] writing ../../../build/teleop_bridge/teleop_bridge.egg-info/PKG-INFO
+[1.025s] writing dependency_links to ../../../build/teleop_bridge/teleop_bridge.egg-info/dependency_links.txt
+[1.025s] writing entry points to ../../../build/teleop_bridge/teleop_bridge.egg-info/entry_points.txt
+[1.025s] writing requirements to ../../../build/teleop_bridge/teleop_bridge.egg-info/requires.txt
+[1.025s] writing top-level names to ../../../build/teleop_bridge/teleop_bridge.egg-info/top_level.txt
+[1.026s] reading manifest file '../../../build/teleop_bridge/teleop_bridge.egg-info/SOURCES.txt'
+[1.029s] writing manifest file '../../../build/teleop_bridge/teleop_bridge.egg-info/SOURCES.txt'
+[1.029s] running build
+[1.029s] running build_py
+[1.029s] running install
+[1.030s] running install_lib
+[1.031s] running install_data
+[1.031s] running install_egg_info
+[1.033s] removing '/vehicle_1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge-0.0.0-py3.10.egg-info' (and everything under it)
+[1.035s] Copying ../../../build/teleop_bridge/teleop_bridge.egg-info to /vehicle_1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge-0.0.0-py3.10.egg-info
+[1.036s] running install_scripts
+[1.058s] Installing gamepad_node script to /vehicle_1811/install/teleop_bridge/lib/teleop_bridge
+[1.060s] Installing keyboard_teleop_node script to /vehicle_1811/install/teleop_bridge/lib/teleop_bridge
+[1.060s] Installing serial_bridge_node script to /vehicle_1811/install/teleop_bridge/lib/teleop_bridge
+[1.060s] writing list of installed files to '/vehicle_1811/build/teleop_bridge/install.log'
+[1.117s] Invoked command in '/vehicle_1811/ros2_ws/src/teleop_bridge' returned '0': AMENT_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/vehicle_1811/install/vehicle_msgs LD_LIBRARY_PATH=/vehicle_1811/install/vehicle_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/vehicle_1811/build/teleop_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/vehicle_1811/install/teleop_bridge/lib/python3.10/site-packages:/vehicle_1811/install/vehicle_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/teleop_bridge build --build-base /vehicle_1811/build/teleop_bridge/build install --record /vehicle_1811/build/teleop_bridge/install.log --install-scripts $base/lib/teleop_bridge --single-version-externally-managed install_data

@@ -1,0 +1,8 @@
+msg/Detection.idl
+msg/Detection.msg
+msg/DetectionArray.idl
+msg/DetectionArray.msg
+msg/VehicleCommand.idl
+msg/VehicleCommand.msg
+msg/VehicleState.idl
+msg/VehicleState.msg

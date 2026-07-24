@@ -1,0 +1,21 @@
+running egg_info
+writing ../../../build/teleop_bridge/teleop_bridge.egg-info/PKG-INFO
+writing dependency_links to ../../../build/teleop_bridge/teleop_bridge.egg-info/dependency_links.txt
+writing entry points to ../../../build/teleop_bridge/teleop_bridge.egg-info/entry_points.txt
+writing requirements to ../../../build/teleop_bridge/teleop_bridge.egg-info/requires.txt
+writing top-level names to ../../../build/teleop_bridge/teleop_bridge.egg-info/top_level.txt
+reading manifest file '../../../build/teleop_bridge/teleop_bridge.egg-info/SOURCES.txt'
+writing manifest file '../../../build/teleop_bridge/teleop_bridge.egg-info/SOURCES.txt'
+running build
+running build_py
+running install
+running install_lib
+running install_data
+running install_egg_info
+removing '/vehicle_1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../../build/teleop_bridge/teleop_bridge.egg-info to /vehicle_1811/install/teleop_bridge/lib/python3.10/site-packages/teleop_bridge-0.0.0-py3.10.egg-info
+running install_scripts
+Installing gamepad_node script to /vehicle_1811/install/teleop_bridge/lib/teleop_bridge
+Installing keyboard_teleop_node script to /vehicle_1811/install/teleop_bridge/lib/teleop_bridge
+Installing serial_bridge_node script to /vehicle_1811/install/teleop_bridge/lib/teleop_bridge
+writing list of installed files to '/vehicle_1811/build/teleop_bridge/install.log'

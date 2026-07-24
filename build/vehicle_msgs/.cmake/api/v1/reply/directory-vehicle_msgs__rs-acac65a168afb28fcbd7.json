@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "vehicle_msgs__rs",
+		"source" : "/vehicle_1811/build/vehicle_msgs/vehicle_msgs__rs"
+	}
+}

@@ -1,0 +1,22 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from vehicle_msgs/msg/Detection.msg
+// generated code does not contain a copyright notice
+
+
+module vehicle_msgs {
+  module msg {
+    struct Detection {
+      string label;
+
+      float confidence;
+
+      float x_min;
+
+      float y_min;
+
+      float x_max;
+
+      float y_max;
+    };
+  };
+};

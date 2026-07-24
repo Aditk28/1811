@@ -1,3 +1,151 @@
+# 1811 Vehicle Software
+
+## Docker (this is how everything runs now — Karbon, Windows laptop, or any dev machine)
+
+All ROS 2 code in this repo runs inside a Docker container built from `ros:humble`.
+This means:
+
+- **No native ROS 2 install is required on any machine** — not the Karbon
+  (Ubuntu 24.04), not a Windows laptop (via WSL), not a fresh machine.
+- The container brings its own Ubuntu 22.04 / ROS 2 Humble userspace
+  regardless of what the host OS actually is. The host's job is just to run
+  Docker.
+- The same image and the same commands work identically everywhere. Machine
+  differences (Karbon vs. laptop, Linux vs. WSL) only affect a couple of
+  host-level steps below (USB passthrough, display forwarding) — never the
+  ROS/Docker workflow itself.
+
+### First-time setup (any machine)
+
+```bash
+git clone git@github.com:yourorg/1811.git
+cd 1811
+bash scripts/setup_machine.sh   # installs/checks Docker, builds the image
+```
+
+### Daily use
+
+```bash
+docker compose run --rm dev bash
+```
+
+This drops you into a shell **inside the container**, with:
+- the repo bind-mounted at `/vehicle_1811` (edits on the host are reflected
+  instantly, no rebuild needed),
+- `/dev` passed through (so serial/USB devices appear exactly as they do on
+  the host),
+- your display forwarded (so the teleop pygame window can open).
+
+ROS 2 and the workspace are sourced automatically when the container shell
+starts. If you ever need to do it by hand (e.g. inside a script, or a shell
+that skipped the automatic sourcing):
+
+```bash
+source /opt/ros/humble/setup.bash
+source /vehicle_1811/ros2_ws/install/setup.bash
+```
+
+### Building the workspace after code changes
+
+Same as before, just run **inside the container** now:
+
+```bash
+cd /vehicle_1811/ros2_ws
+colcon build --symlink-install
+source install/setup.bash
+```
+
+Run this again any time you edit C++ code, add/remove a package, or change
+`package.xml` / `CMakeLists.txt`. Pure-Python changes take effect immediately
+(no rebuild needed) as long as `--symlink-install` was used.
+
+You do **not** need to rebuild the Docker image itself for code changes —
+only for changes to system/apt/pip dependencies (i.e. edits to the
+`Dockerfile`).
+
+### docker-compose services
+
+- **`dev`** — generic development container. Used on the Karbon, on laptops,
+  anywhere. Bind-mounts the repo, passes through `/dev`, forwards `DISPLAY`.
+- **`obc`** — same image, same setup, intended specifically for the Karbon
+  running as the actual on-board computer. Exists as its own service mainly
+  so Karbon-specific overrides (a fixed serial port path, autostart behavior,
+  etc.) have somewhere to live later without touching the shared `dev`
+  service.
+
+`docker-compose.yml` (repo root):
+
+```yaml
+version: "3.8"
+name: vehicle_1811
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vehicle_1811
+    container_name: vehicle_1811_dev_${USER}
+    privileged: true
+    stdin_open: true
+    tty: true
+    network_mode: "host"
+    volumes:
+      - type: bind
+        source: $PWD
+        target: /vehicle_1811
+      - type: bind
+        source: /dev
+        target: /dev
+      - type: bind
+        source: /tmp/.X11-unix
+        target: /tmp/.X11-unix
+      - type: bind
+        source: ${HOME}/.Xauthority
+        target: /root/.Xauthority
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+
+  obc:
+    extends: dev
+    container_name: vehicle_1811_obc
+```
+
+`privileged: true` gives the container full device access, which is why you
+won't need to fuss with `dialout` group permissions *inside* the container —
+it already has access to whatever the host exposes to it.
+
+### Serial / USB devices inside the container
+
+Because `/dev` is bind-mounted wholesale, `/dev/ttyACM0` (or whatever the
+Arduino enumerates as) is visible inside the container exactly as it is on
+the host — same name, same behavior.
+
+- **On the Karbon:** plug in the Arduino, confirm the name with
+  `ls /dev/ttyACM*` on the host, and it's already visible inside the
+  container — no extra step.
+- **On a Windows laptop (WSL):** you still need the `usbipd` steps below to
+  get the device into WSL *first*. Docker Desktop's WSL2 backend only sees
+  devices that WSL itself can see — it does not talk to Windows USB directly.
+  Once `usbipd attach` succeeds and `ls /dev/ttyACM*` works from a plain WSL
+  shell, it will also show up inside the container without any extra
+  binding — the `/dev` bind-mount is live, not a snapshot, so devices that
+  appear after the container has already started are picked up
+  automatically (no need to restart `docker compose run`).
+
+### GUI apps (teleop pygame window) inside the container
+
+- **On the Karbon:** works via the standard X11 `DISPLAY` +
+  `/tmp/.X11-unix` bind already wired into the compose file above.
+- **On a Windows laptop (WSL):** requires WSLg (see WSL-specific setup
+  below). Confirm `echo $DISPLAY` is non-empty in a **plain WSL shell**
+  first — if it's empty there, it'll be empty inside the container too,
+  since the container just inherits whatever `$DISPLAY` the host WSL shell
+  had when you ran `docker compose run`.
+
+---
+
 ## Serial protocol (Karbon <-> Arduino)
 
 JSON, newline-terminated, **57600 baud**.
@@ -15,19 +163,23 @@ for now.
 
 ## Running teleop (keyboard, no gamepad required)
 
-Requires a display (WSL: confirm with `echo $DISPLAY`, and `wsl --update` /
-restart WSL if empty — WSLg is required for the pygame window to appear).
+Run all of the following **inside the Docker container**
+(`docker compose run --rm dev bash`) — not directly on the host.
 
-**Terminal 1 — serial bridge:**
+Requires a display: WSL users, confirm `echo $DISPLAY` is non-empty in a
+plain WSL shell before entering the container (`wsl --update` / restart WSL
+if empty — WSLg is required for the pygame window to appear).
+
+**Terminal 1 — serial bridge** (each terminal enters its own container shell
+via `docker compose run --rm dev bash`; ROS and the workspace are already
+sourced automatically):
 ```bash
-source ~/1811/ros2_ws/install/setup.bash
 ros2 run teleop_bridge serial_bridge_node --ros-args -p port:=/dev/ttyACM0 -p baud:=57600
 ```
 Check `ls /dev/ttyACM*` first — the device name can change between replugs.
 
 **Terminal 2 — keyboard teleop:**
 ```bash
-source ~/1811/ros2_ws/install/setup.bash
 ros2 run teleop_bridge keyboard_teleop_node
 ```
 Click into the pygame window (not the terminal) for it to receive keys.
@@ -38,7 +190,6 @@ Click into the pygame window (not the terminal) for it to receive keys.
 
 **Terminal 3 (optional) — watch what's being published:**
 ```bash
-source ~/1811/ros2_ws/install/setup.bash
 ros2 topic echo /vehicle_command
 ```
 
@@ -50,11 +201,14 @@ ros2 launch teleop_bridge teleop_bridge.launch.py
 Calibrate axis indices first — see comments at the top of
 `teleop_bridge/gamepad_node.py`. Run `ros2 topic echo /joy` and move each
 control individually to confirm which `axes[i]` maps to what before trusting
-the defaults.
+the defaults. The joystick device (e.g. `/dev/input/js0`) is passed through
+the same way serial devices are — via the `/dev` bind-mount — so no extra
+container config is needed once it shows up on the host.
 
 ## WSL-specific setup (if running on a laptop instead of the Karbon)
 
-USB devices plugged into Windows aren't visible to WSL by default.
+USB devices plugged into Windows aren't visible to WSL (or to Docker Desktop,
+which runs on top of WSL) by default.
 
 **Windows PowerShell (as Administrator):**
 ```powershell
@@ -65,19 +219,31 @@ usbipd attach --wsl --busid <busid>
 ```
 Re-run `attach` after every unplug/replug or reboot.
 
-**In WSL**, confirm:
+**In a plain WSL shell**, confirm the device is visible *before* entering the
+container:
 ```bash
 ls /dev/ttyACM* /dev/ttyUSB*
 ```
 
-## Setting up on the Karbon (or a fresh machine)
+Once that shows the device, it will also be visible inside
+`docker compose run --rm dev bash` automatically.
+
+Also confirm Docker Desktop's WSL integration is enabled for your distro:
+**Docker Desktop → Settings → Resources → WSL Integration** — toggle your
+distro on, then **Apply & Restart** if you change it.
+
+## Setting up on the Karbon (or any fresh machine)
 
 ```bash
 git clone git@github.com:yourorg/1811.git
 cd 1811
-bash scripts/setup_karbon.sh
-source ~/1811/ros2_ws/install/setup.bash
+bash scripts/setup_machine.sh
+docker compose run --rm dev bash
 ```
+
+No native ROS 2 install is needed anywhere in this flow. `scripts/setup_machine.sh`
+only handles host-level prerequisites (Docker itself, plus a couple of
+convenience/fallback steps) — see the script for details.
 
 ## Known issues / things to watch
 
@@ -85,26 +251,17 @@ source ~/1811/ros2_ws/install/setup.bash
   firmware currently keeps executing the last received command indefinitely.
   `checkStaleness()` exists in the firmware but must be enabled, and should
   set `braking = 1.0` (not 0) on timeout. **Do not run this vehicle
-  unsupervised or with wheels on the ground until this is fixed.**
+  unsupervised or with wheels on the ground until this is fixed.** This is a
+  firmware-level issue and applies identically whether the ROS side is
+  running natively or inside Docker.
 - Debug `Serial.println()` calls in the firmware were removed — they were
   polluting the same serial channel the Python side parses as JSON, causing
   intermittent parse failures.
 - The firmware only drains one line from the serial buffer per `loop()`
   iteration in earlier versions — if commands start lagging/backing up
   again, check that the drain-all-buffered-lines fix is still in place.
-EOF
-## Running the setup script on a new machine
-
-Once ROS 2 Humble is installed and the repo is cloned:
-
-```bash
-cd ~/1811
-bash scripts/setup_karbon.sh
-```
-
-If it says it added you to the `dialout` group, log out and back in (or
-close/reopen your terminal) before running any serial commands, then:
-
-```bash
-source ~/1811/ros2_ws/install/setup.bash
-```
+- If a device (`/dev/ttyACM0`, `/dev/input/js0`, etc.) doesn't appear inside
+  a container that's already running, it usually means the device wasn't
+  present on the host yet when checked — re-run `ls /dev/ttyACM*` on the
+  host first; the container's `/dev` bind-mount reflects the host live, so
+  there's no need to restart the container once the device is actually there.
