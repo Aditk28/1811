@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
     git \
     ros-humble-pcl-conversions \
     ros-humble-pcl-ros \
-    git config --global --add safe.directory /vehicle_1811 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN git config --global --add safe.directory /vehicle_1811
 
 WORKDIR /vehicle_1811

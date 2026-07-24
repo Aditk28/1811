@@ -1,0 +1,846 @@
+[0.591s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.591s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=24, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x73bb10547490>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x73bb10546890>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x73bb10546890>>, mixin_verb=('build',))
+[0.850s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.851s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.851s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.851s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.851s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.851s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.851s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/adit22/1811'
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.912s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['ignore', 'ignore_ament_install']
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'ignore'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'ignore_ament_install'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['colcon_pkg']
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'colcon_pkg'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['colcon_meta']
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'colcon_meta'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['ros']
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'ros'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['cmake', 'python']
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'cmake'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'python'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extensions ['python_setup_py']
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino) by extension 'python_setup_py'
+[0.913s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['ignore', 'ignore_ament_install']
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'ignore'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'ignore_ament_install'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['colcon_pkg']
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'colcon_pkg'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['colcon_meta']
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'colcon_meta'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['ros']
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'ros'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['cmake', 'python']
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'cmake'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'python'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extensions ['python_setup_py']
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware) by extension 'python_setup_py'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['ignore', 'ignore_ament_install']
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'ignore'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'ignore_ament_install'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['colcon_pkg']
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'colcon_pkg'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['colcon_meta']
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'colcon_meta'
+[0.914s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['ros']
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'ros'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['cmake', 'python']
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'cmake'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'python'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extensions ['python_setup_py']
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/lib) by extension 'python_setup_py'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['ignore', 'ignore_ament_install']
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'ignore'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'ignore_ament_install'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['colcon_pkg']
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'colcon_pkg'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['colcon_meta']
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'colcon_meta'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['ros']
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'ros'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['cmake', 'python']
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'cmake'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'python'
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extensions ['python_setup_py']
+[0.915s] Level 1:colcon.colcon_core.package_identification:_identify(arduino/firmware/src) by extension 'python_setup_py'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['ignore', 'ignore_ament_install']
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ignore'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ignore_ament_install'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['colcon_pkg']
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'colcon_pkg'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['colcon_meta']
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'colcon_meta'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['ros']
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ros'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['cmake', 'python']
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'cmake'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'python'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['python_setup_py']
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'python_setup_py'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.916s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['ignore', 'ignore_ament_install']
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'ignore'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'ignore_ament_install'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['colcon_pkg']
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'colcon_pkg'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['colcon_meta']
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'colcon_meta'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['ros']
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'ros'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['cmake', 'python']
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'cmake'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'python'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extensions ['python_setup_py']
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws) by extension 'python_setup_py'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/build) by extensions ['ignore', 'ignore_ament_install']
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/build) by extension 'ignore'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/build) ignored
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/install) by extensions ['ignore', 'ignore_ament_install']
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/install) by extension 'ignore'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/install) ignored
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/log) by extensions ['ignore', 'ignore_ament_install']
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/log) by extension 'ignore'
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/log) ignored
+[0.917s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['ignore', 'ignore_ament_install']
+[0.918s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'ignore'
+[0.918s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'ignore_ament_install'
+[0.918s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['colcon_pkg']
+[0.918s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'colcon_pkg'
+[0.918s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['colcon_meta']
+[0.918s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'colcon_meta'
+[0.918s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['ros']
+[0.918s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'ros'
+[0.919s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['cmake', 'python']
+[0.919s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'cmake'
+[0.919s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'python'
+[0.919s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extensions ['python_setup_py']
+[0.919s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src) by extension 'python_setup_py'
+[0.919s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extensions ['ignore', 'ignore_ament_install']
+[0.919s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extension 'ignore'
+[0.920s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extension 'ignore_ament_install'
+[0.920s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extensions ['colcon_pkg']
+[0.920s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extension 'colcon_pkg'
+[0.920s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extensions ['colcon_meta']
+[0.920s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extension 'colcon_meta'
+[0.920s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extensions ['ros']
+[0.920s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/camera_perception) by extension 'ros'
+[0.930s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/camera_perception' with type 'ros.ament_python' and name 'camera_perception'
+[0.931s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.931s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extension 'ignore'
+[0.931s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extension 'ignore_ament_install'
+[0.931s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extensions ['colcon_pkg']
+[0.931s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extension 'colcon_pkg'
+[0.931s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extensions ['colcon_meta']
+[0.931s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extension 'colcon_meta'
+[0.931s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extensions ['ros']
+[0.931s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/jetson_bringup) by extension 'ros'
+[0.933s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/jetson_bringup' with type 'ros.ament_cmake' and name 'jetson_bringup'
+[0.933s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extensions ['ignore', 'ignore_ament_install']
+[0.933s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extension 'ignore'
+[0.933s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extension 'ignore_ament_install'
+[0.933s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extensions ['colcon_pkg']
+[0.933s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extension 'colcon_pkg'
+[0.933s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extensions ['colcon_meta']
+[0.933s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extension 'colcon_meta'
+[0.933s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extensions ['ros']
+[0.934s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/lidar_perception) by extension 'ros'
+[0.935s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/lidar_perception' with type 'ros.ament_cmake' and name 'lidar_perception'
+[0.936s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.936s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extension 'ignore'
+[0.937s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extension 'ignore_ament_install'
+[0.937s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extensions ['colcon_pkg']
+[0.937s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extension 'colcon_pkg'
+[0.937s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extensions ['colcon_meta']
+[0.937s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extension 'colcon_meta'
+[0.937s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extensions ['ros']
+[0.937s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/obc_bringup) by extension 'ros'
+[0.939s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/obc_bringup' with type 'ros.ament_cmake' and name 'obc_bringup'
+[0.939s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extensions ['ignore', 'ignore_ament_install']
+[0.939s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extension 'ignore'
+[0.939s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extension 'ignore_ament_install'
+[0.939s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extensions ['colcon_pkg']
+[0.939s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extension 'colcon_pkg'
+[0.940s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extensions ['colcon_meta']
+[0.940s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extension 'colcon_meta'
+[0.940s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extensions ['ros']
+[0.940s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/sensor_fusion) by extension 'ros'
+[0.941s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/sensor_fusion' with type 'ros.ament_python' and name 'sensor_fusion'
+[0.941s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extensions ['ignore', 'ignore_ament_install']
+[0.941s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extension 'ignore'
+[0.941s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extension 'ignore_ament_install'
+[0.941s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extensions ['colcon_pkg']
+[0.942s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extension 'colcon_pkg'
+[0.942s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extensions ['colcon_meta']
+[0.942s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extension 'colcon_meta'
+[0.942s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extensions ['ros']
+[0.942s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/teleop_bridge) by extension 'ros'
+[0.945s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/teleop_bridge' with type 'ros.ament_python' and name 'teleop_bridge'
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extension 'ignore'
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extension 'ignore_ament_install'
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extensions ['colcon_pkg']
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extension 'colcon_pkg'
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extensions ['colcon_meta']
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extension 'colcon_meta'
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extensions ['ros']
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(ros2_ws/src/vehicle_msgs) by extension 'ros'
+[0.946s] DEBUG:colcon.colcon_core.package_identification:Package 'ros2_ws/src/vehicle_msgs' with type 'ros.ament_cmake' and name 'vehicle_msgs'
+[0.946s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['ignore', 'ignore_ament_install']
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ignore'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ignore_ament_install'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['colcon_pkg']
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'colcon_pkg'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['colcon_meta']
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'colcon_meta'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['ros']
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ros'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['cmake', 'python']
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'cmake'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'python'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['python_setup_py']
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'python_setup_py'
+[0.947s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.947s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.948s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.948s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.948s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[1.020s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[1.020s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[1.030s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 7 installed packages in /home/adit22/1811/ros2_ws/install
+[1.031s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 9 installed packages in /home/adit22/rosbot/install
+[1.032s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 354 installed packages in /opt/ros/humble
+[1.033s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_args' from command line to 'None'
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_target' from command line to 'None'
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'jetson_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.140s] DEBUG:colcon.colcon_core.verb:Building package 'jetson_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/adit22/1811/build/jetson_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/adit22/1811/install/jetson_bringup', 'merge_install': False, 'path': '/home/adit22/1811/ros2_ws/src/jetson_bringup', 'symlink_install': True, 'test_result_base': None}
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_args' from command line to 'None'
+[1.140s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_target' from command line to 'None'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'obc_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.141s] DEBUG:colcon.colcon_core.verb:Building package 'obc_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/adit22/1811/build/obc_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/adit22/1811/install/obc_bringup', 'merge_install': False, 'path': '/home/adit22/1811/ros2_ws/src/obc_bringup', 'symlink_install': True, 'test_result_base': None}
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_args' from command line to 'None'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_target' from command line to 'None'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[1.141s] Level 5:colcon.colcon_core.verb:set package 'vehicle_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.141s] DEBUG:colcon.colcon_core.verb:Building package 'vehicle_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/adit22/1811/build/vehicle_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/adit22/1811/install/vehicle_msgs', 'merge_install': False, 'path': '/home/adit22/1811/ros2_ws/src/vehicle_msgs', 'symlink_install': True, 'test_result_base': None}
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_args' from command line to 'None'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_target' from command line to 'None'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_clean_cache' from command line to 'False'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_clean_first' from command line to 'False'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'cmake_force_configure' from command line to 'False'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'ament_cmake_args' from command line to 'None'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'catkin_cmake_args' from command line to 'None'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'camera_perception' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.142s] DEBUG:colcon.colcon_core.verb:Building package 'camera_perception' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/adit22/1811/build/camera_perception', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/adit22/1811/install/camera_perception', 'merge_install': False, 'path': '/home/adit22/1811/ros2_ws/src/camera_perception', 'symlink_install': True, 'test_result_base': None}
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_args' from command line to 'None'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_target' from command line to 'None'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_clean_cache' from command line to 'False'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_clean_first' from command line to 'False'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'cmake_force_configure' from command line to 'False'
+[1.142s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'ament_cmake_args' from command line to 'None'
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'catkin_cmake_args' from command line to 'None'
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'lidar_perception' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.143s] DEBUG:colcon.colcon_core.verb:Building package 'lidar_perception' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/adit22/1811/build/lidar_perception', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/adit22/1811/install/lidar_perception', 'merge_install': False, 'path': '/home/adit22/1811/ros2_ws/src/lidar_perception', 'symlink_install': True, 'test_result_base': None}
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_args' from command line to 'None'
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_target' from command line to 'None'
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_clean_cache' from command line to 'False'
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_clean_first' from command line to 'False'
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'cmake_force_configure' from command line to 'False'
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'ament_cmake_args' from command line to 'None'
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'catkin_cmake_args' from command line to 'None'
+[1.143s] Level 5:colcon.colcon_core.verb:set package 'sensor_fusion' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.143s] DEBUG:colcon.colcon_core.verb:Building package 'sensor_fusion' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/adit22/1811/build/sensor_fusion', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/adit22/1811/install/sensor_fusion', 'merge_install': False, 'path': '/home/adit22/1811/ros2_ws/src/sensor_fusion', 'symlink_install': True, 'test_result_base': None}
+[1.144s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_args' from command line to 'None'
+[1.144s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_target' from command line to 'None'
+[1.144s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.144s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_clean_cache' from command line to 'False'
+[1.144s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_clean_first' from command line to 'False'
+[1.144s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'cmake_force_configure' from command line to 'False'
+[1.144s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'ament_cmake_args' from command line to 'None'
+[1.144s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'catkin_cmake_args' from command line to 'None'
+[1.144s] Level 5:colcon.colcon_core.verb:set package 'teleop_bridge' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.144s] DEBUG:colcon.colcon_core.verb:Building package 'teleop_bridge' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/adit22/1811/build/teleop_bridge', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/adit22/1811/install/teleop_bridge', 'merge_install': False, 'path': '/home/adit22/1811/ros2_ws/src/teleop_bridge', 'symlink_install': True, 'test_result_base': None}
+[1.144s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[1.146s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[1.146s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/adit22/1811/ros2_ws/src/vehicle_msgs' with build type 'ament_cmake'
+[1.146s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/adit22/1811/ros2_ws/src/vehicle_msgs'
+[1.155s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[1.156s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.156s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.162s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'sh': [Errno 13] Permission denied: '/home/adit22/1811/build/vehicle_msgs/colcon_command_prefix_build.sh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 309, in get_command_environment
+    return await extension.generate_command_environment(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 148, in generate_command_environment
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/build/vehicle_msgs/colcon_command_prefix_build.sh'
+
+[1.162s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'bash' for command environment
+[1.162s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'zsh' for command environment
+[1.162s] ERROR:colcon.colcon_cmake.task.cmake.build:Could not find a shell extension for the command environment
+[1.163s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(vehicle_msgs)
+[1.172s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/vehicle_msgs' for CMake module files
+[1.172s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/vehicle_msgs' for CMake config files
+[1.173s] Level 1:colcon.colcon_core.shell:create_environment_hook('vehicle_msgs', 'cmake_prefix_path')
+[1.173s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.ps1'
+[1.175s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'powershell': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.ps1'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_powershell/shell/powershell.py", line 151, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.ps1'
+
+[1.175s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.dsv'
+[1.176s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'dsv': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.dsv'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/dsv.py", line 75, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.dsv'
+
+[1.177s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.sh'
+[1.177s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'sh': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.sh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 127, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/cmake_prefix_path.sh'
+
+[1.178s] ERROR:colcon.colcon_core.environment:Exception in environment extension 'cmake_prefix_path': Could not find a primary shell extension for creating an environment hook
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 193, in create_environment_hooks
+    hooks = extension.create_environment_hooks(prefix_path, pkg_name)
+  File "/usr/lib/python3/dist-packages/colcon_cmake/environment/cmake_prefix_path.py", line 28, in create_environment_hooks
+    hooks += create_environment_hook(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 481, in create_environment_hook
+    raise RuntimeError(
+RuntimeError: Could not find a primary shell extension for creating an environment hook
+
+[1.179s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/vehicle_msgs/lib'
+[1.179s] Level 1:colcon.colcon_core.shell:create_environment_hook('vehicle_msgs', 'ld_library_path_lib')
+[1.179s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.ps1'
+[1.180s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'powershell': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.ps1'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_powershell/shell/powershell.py", line 151, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.ps1'
+
+[1.180s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.dsv'
+[1.180s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'dsv': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.dsv'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/dsv.py", line 75, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.dsv'
+
+[1.180s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.sh'
+[1.180s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'sh': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.sh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 127, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/hook/ld_library_path_lib.sh'
+
+[1.181s] ERROR:colcon.colcon_core.environment:Exception in environment extension 'library_path': Could not find a primary shell extension for creating an environment hook
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 193, in create_environment_hooks
+    hooks = extension.create_environment_hooks(prefix_path, pkg_name)
+  File "/usr/lib/python3/dist-packages/colcon_library_path/environment/library_path.py", line 57, in create_environment_hooks
+    environment_hooks += create_environment_hook(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 481, in create_environment_hook
+    raise RuntimeError(
+RuntimeError: Could not find a primary shell extension for creating an environment hook
+
+[1.181s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/vehicle_msgs/bin'
+[1.181s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/vehicle_msgs/lib/pkgconfig/vehicle_msgs.pc'
+[1.181s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/vehicle_msgs/lib/python3.10/site-packages'
+[1.181s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/vehicle_msgs/bin'
+[1.182s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.ps1'
+[1.183s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'powershell': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.ps1'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_powershell/shell/powershell.py", line 120, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.ps1'
+
+[1.183s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.dsv'
+[1.184s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'dsv': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.dsv'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/dsv.py", line 30, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.dsv'
+
+[1.184s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.sh'
+[1.184s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'sh': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.sh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 83, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.sh'
+
+[1.185s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.bash'
+[1.186s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'bash': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.bash'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_bash/shell/bash.py", line 63, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.bash'
+
+[1.186s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.zsh'
+[1.188s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'zsh': [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.zsh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_zsh/shell/zsh.py", line 63, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/vehicle_msgs/share/vehicle_msgs/package.zsh'
+
+[1.188s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/adit22/1811/install/vehicle_msgs/share/colcon-core/packages/vehicle_msgs)
+[1.189s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/adit22/1811/ros2_ws/src/jetson_bringup' with build type 'ament_cmake'
+[1.189s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/adit22/1811/ros2_ws/src/jetson_bringup'
+[1.191s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.191s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.195s] ERROR:colcon.colcon_core.event_reactor:Exception in event handler extension 'store_result': [Errno 13] Permission denied: '/home/adit22/1811/build/vehicle_msgs/colcon_build.rc'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/event_reactor.py", line 78, in _notify_observers
+    retval = observer(event)
+  File "/usr/lib/python3/dist-packages/colcon_package_selection/package_selection/previous/event_handler.py", line 53, in __call__
+    set_result(job.task_context.args.build_base, verb_name, result)
+  File "/usr/lib/python3/dist-packages/colcon_package_selection/package_selection/previous/__init__.py", line 36, in set_result
+    path.write_text(str(result) + '\n')
+  File "/usr/lib/python3.10/pathlib.py", line 1154, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/build/vehicle_msgs/colcon_build.rc'
+
+[1.197s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'sh': [Errno 13] Permission denied: '/home/adit22/1811/build/jetson_bringup/colcon_command_prefix_build.sh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 309, in get_command_environment
+    return await extension.generate_command_environment(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 148, in generate_command_environment
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/build/jetson_bringup/colcon_command_prefix_build.sh'
+
+[1.198s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'bash' for command environment
+[1.198s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'zsh' for command environment
+[1.198s] ERROR:colcon.colcon_cmake.task.cmake.build:Could not find a shell extension for the command environment
+[1.198s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(jetson_bringup)
+[1.198s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/jetson_bringup' for CMake module files
+[1.199s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/jetson_bringup' for CMake config files
+[1.199s] Level 1:colcon.colcon_core.shell:create_environment_hook('jetson_bringup', 'cmake_prefix_path')
+[1.199s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.ps1'
+[1.200s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'powershell': [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.ps1'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_powershell/shell/powershell.py", line 151, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.ps1'
+
+[1.200s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.dsv'
+[1.200s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'dsv': [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.dsv'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/dsv.py", line 75, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.dsv'
+
+[1.200s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.sh'
+[1.201s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'sh': [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.sh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 127, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/hook/cmake_prefix_path.sh'
+
+[1.201s] ERROR:colcon.colcon_core.environment:Exception in environment extension 'cmake_prefix_path': Could not find a primary shell extension for creating an environment hook
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 193, in create_environment_hooks
+    hooks = extension.create_environment_hooks(prefix_path, pkg_name)
+  File "/usr/lib/python3/dist-packages/colcon_cmake/environment/cmake_prefix_path.py", line 28, in create_environment_hooks
+    hooks += create_environment_hook(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 481, in create_environment_hook
+    raise RuntimeError(
+RuntimeError: Could not find a primary shell extension for creating an environment hook
+
+[1.201s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/jetson_bringup/bin'
+[1.201s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/jetson_bringup/lib/pkgconfig/jetson_bringup.pc'
+[1.202s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/jetson_bringup/lib/python3.10/site-packages'
+[1.202s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/jetson_bringup/bin'
+[1.202s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.ps1'
+[1.213s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'powershell': [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.ps1'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_powershell/shell/powershell.py", line 120, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.ps1'
+
+[1.214s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.dsv'
+[1.216s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'dsv': [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.dsv'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/dsv.py", line 30, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.dsv'
+
+[1.216s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.sh'
+[1.218s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'sh': [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.sh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 83, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.sh'
+
+[1.218s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.bash'
+[1.220s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'bash': [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.bash'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_bash/shell/bash.py", line 63, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.bash'
+
+[1.220s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.zsh'
+[1.222s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'zsh': [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.zsh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_zsh/shell/zsh.py", line 63, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/jetson_bringup/package.zsh'
+
+[1.223s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/adit22/1811/install/jetson_bringup/share/colcon-core/packages/jetson_bringup)
+[1.224s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/adit22/1811/ros2_ws/src/obc_bringup' with build type 'ament_cmake'
+[1.225s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/adit22/1811/ros2_ws/src/obc_bringup'
+[1.226s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.226s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.231s] ERROR:colcon.colcon_core.event_reactor:Exception in event handler extension 'store_result': [Errno 13] Permission denied: '/home/adit22/1811/build/jetson_bringup/colcon_build.rc'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/event_reactor.py", line 78, in _notify_observers
+    retval = observer(event)
+  File "/usr/lib/python3/dist-packages/colcon_package_selection/package_selection/previous/event_handler.py", line 53, in __call__
+    set_result(job.task_context.args.build_base, verb_name, result)
+  File "/usr/lib/python3/dist-packages/colcon_package_selection/package_selection/previous/__init__.py", line 36, in set_result
+    path.write_text(str(result) + '\n')
+  File "/usr/lib/python3.10/pathlib.py", line 1154, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/build/jetson_bringup/colcon_build.rc'
+
+[1.235s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'sh': [Errno 13] Permission denied: '/home/adit22/1811/build/obc_bringup/colcon_command_prefix_build.sh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 309, in get_command_environment
+    return await extension.generate_command_environment(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 148, in generate_command_environment
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/build/obc_bringup/colcon_command_prefix_build.sh'
+
+[1.236s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'bash' for command environment
+[1.236s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'zsh' for command environment
+[1.236s] ERROR:colcon.colcon_cmake.task.cmake.build:Could not find a shell extension for the command environment
+[1.236s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(obc_bringup)
+[1.236s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/obc_bringup' for CMake module files
+[1.237s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/obc_bringup' for CMake config files
+[1.237s] Level 1:colcon.colcon_core.shell:create_environment_hook('obc_bringup', 'cmake_prefix_path')
+[1.237s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/adit22/1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.ps1'
+[1.238s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'powershell': [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.ps1'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_powershell/shell/powershell.py", line 151, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.ps1'
+
+[1.238s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/adit22/1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.dsv'
+[1.238s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'dsv': [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.dsv'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/dsv.py", line 75, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.dsv'
+
+[1.239s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/adit22/1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.sh'
+[1.239s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'sh': [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.sh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 462, in create_environment_hook
+    hook = extension.create_hook_prepend_value(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 127, in create_hook_prepend_value
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/hook/cmake_prefix_path.sh'
+
+[1.239s] ERROR:colcon.colcon_core.environment:Exception in environment extension 'cmake_prefix_path': Could not find a primary shell extension for creating an environment hook
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 193, in create_environment_hooks
+    hooks = extension.create_environment_hooks(prefix_path, pkg_name)
+  File "/usr/lib/python3/dist-packages/colcon_cmake/environment/cmake_prefix_path.py", line 28, in create_environment_hooks
+    hooks += create_environment_hook(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 481, in create_environment_hook
+    raise RuntimeError(
+RuntimeError: Could not find a primary shell extension for creating an environment hook
+
+[1.240s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/obc_bringup/bin'
+[1.240s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/obc_bringup/lib/pkgconfig/obc_bringup.pc'
+[1.240s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/obc_bringup/lib/python3.10/site-packages'
+[1.240s] Level 1:colcon.colcon_core.environment:checking '/home/adit22/1811/install/obc_bringup/bin'
+[1.241s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.ps1'
+[1.241s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'powershell': [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.ps1'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_powershell/shell/powershell.py", line 120, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.ps1'
+
+[1.241s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.dsv'
+[1.242s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'dsv': [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.dsv'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/dsv.py", line 30, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.dsv'
+
+[1.242s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.sh'
+[1.242s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'sh': [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.sh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 83, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.sh'
+
+[1.243s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.bash'
+[1.244s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'bash': [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.bash'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_bash/shell/bash.py", line 63, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.bash'
+
+[1.244s] INFO:colcon.colcon_core.shell:Creating package script '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.zsh'
+[1.244s] ERROR:colcon.colcon_core.environment:Exception in shell extension 'zsh': [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.zsh'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/environment/__init__.py", line 141, in create_environment_scripts_only
+    scripts = extension.create_package_script(
+  File "/usr/lib/python3/dist-packages/colcon_zsh/shell/zsh.py", line 63, in create_package_script
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 68, in expand_template
+    with destination_path.open('w') as h:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/install/obc_bringup/share/obc_bringup/package.zsh'
+
+[1.244s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/adit22/1811/install/obc_bringup/share/colcon-core/packages/obc_bringup)
+[1.246s] ERROR:colcon.colcon_core.event_reactor:Exception in event handler extension 'store_result': [Errno 13] Permission denied: '/home/adit22/1811/build/obc_bringup/colcon_build.rc'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/event_reactor.py", line 78, in _notify_observers
+    retval = observer(event)
+  File "/usr/lib/python3/dist-packages/colcon_package_selection/package_selection/previous/event_handler.py", line 53, in __call__
+    set_result(job.task_context.args.build_base, verb_name, result)
+  File "/usr/lib/python3/dist-packages/colcon_package_selection/package_selection/previous/__init__.py", line 36, in set_result
+    path.write_text(str(result) + '\n')
+  File "/usr/lib/python3.10/pathlib.py", line 1154, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+PermissionError: [Errno 13] Permission denied: '/home/adit22/1811/build/obc_bringup/colcon_build.rc'
+
+[1.255s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.255s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.255s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '[Errno 13] Permission denied: '/home/adit22/1811/install/jetson_bringup/share/colcon-core/packages/jetson_bringup''
+[1.256s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.350s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[1.350s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.350s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.351s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.351s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.FileNotFound: Failed to connect to socket /run/user/1000/bus: No such file or directory
+[1.351s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.352s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/adit22/1811/install/local_setup.ps1'
+[1.353s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/adit22/1811/install/_local_setup_util_ps1.py'
+[1.355s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/adit22/1811/install/setup.ps1'
+[1.358s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/adit22/1811/install/local_setup.sh'
+[1.360s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/adit22/1811/install/_local_setup_util_sh.py'
+[1.362s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/adit22/1811/install/setup.sh'
+[1.364s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/adit22/1811/install/local_setup.bash'
+[1.365s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/adit22/1811/install/setup.bash'
+[1.367s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/adit22/1811/install/local_setup.zsh'
+[1.368s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/adit22/1811/install/setup.zsh'
