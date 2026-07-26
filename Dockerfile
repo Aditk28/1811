@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install -y \
     libjsoncpp-dev \
     libspdlog-dev \
     libcurl4-openssl-dev \
+    libopencv-dev \
+    libzip-dev \
+    libssl-dev \
     cmake \
     python3-colcon-common-extensions \
     && apt-get clean && rm -rf /var/lib/apt/lists/*

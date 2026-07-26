@@ -158,9 +158,9 @@ git submodule update --init --recursive
 ```
 
 The image now includes the driver's build dependencies (`libeigen3-dev`,
-`libjsoncpp-dev`, `libspdlog-dev`, `libcurl4-openssl-dev`,
-`ros-humble-tf2-eigen`, `ros-humble-rviz2`), so a normal workspace build picks
-it up:
+`libjsoncpp-dev`, `libspdlog-dev`, `libcurl4-openssl-dev`, `libopencv-dev`,
+`libzip-dev`, `libssl-dev`, `ros-humble-tf2-eigen`, `ros-humble-rviz2`), so a
+normal workspace build picks it up:
 
 ```bash
 cd /vehicle_1811/ros2_ws
@@ -168,11 +168,25 @@ colcon build --symlink-install
 source install/setup.bash
 ```
 
+`ouster_ros`'s `CMakeLists.txt` (and the nested `ouster-sdk`'s `ouster_client`)
+`find_package(... REQUIRED)` for OpenCV, libzip, and OpenSSL — if any of those
+three ever go missing again after a Dockerfile edit, colcon fails with a
+`CMake Error` naming exactly which one, and `Dockerfile` needs the matching
+apt package added back.
+
 Connect to the sensor (host networking is already on via `docker-compose.yml`,
 which the driver needs for UDP lidar/IMU packets):
 
 ```bash
 ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip-or-hostname>
+```
+
+On a machine with no display attached (e.g. the Karbon with no monitor), pass
+`viz:=false` — the launch file starts `rviz2` by default and it will crash
+with "no Qt platform plugin could be initialized" if there's no X11 display:
+
+```bash
+ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip-or-hostname> viz:=false
 ```
 
 This publishes point clouds to `/ouster/points` and IMU data to `/ouster/imu`.
@@ -186,6 +200,25 @@ rviz2   # or: ros2 launch ouster_ros rviz.launch.xml
 Note: `lidar_perception` (this repo's own package) has no source yet — it's
 an empty skeleton. This driver is a separate, independent package; nothing in
 `lidar_perception` consumes its output yet.
+
+### UDP receive buffer warning
+
+The driver logs `Failed to set desired SO_RCVBUF size to 1048576` if the
+host's kernel UDP buffer ceiling is below 1 MB — this is a host `sysctl`
+limit, not a container/driver issue (harmless at low data rates, but risks
+dropped lidar packets under sustained load). Fix on the host:
+
+```bash
+sudo sysctl -w net.core.rmem_max=1048576
+sudo sysctl -w net.core.rmem_default=1048576
+```
+
+To persist across reboots:
+
+```bash
+echo -e "net.core.rmem_max=1048576\nnet.core.rmem_default=1048576" | sudo tee /etc/sysctl.d/99-ouster.conf
+sudo sysctl --system
+```
 
 ## Serial protocol (Karbon <-> Arduino)
 
@@ -306,3 +339,16 @@ convenience/fallback steps) — see the script for details.
   present on the host yet when checked — re-run `ls /dev/ttyACM*` on the
   host first; the container's `/dev` bind-mount reflects the host live, so
   there's no need to restart the container once the device is actually there.
+- **Ouster driver crashes with `terminate called after throwing an instance
+  of 'std::out_of_range'` / `Field 'WINDOW' not found in LidarScan` on
+  sensors running firmware older than 3.2.0.** The driver's point-cloud field
+  layout for the `RNG19_RFL8_SIG16_NIR16` profile always includes a `WINDOW`
+  (window-blockage) field, but that field doesn't exist in the sensor's
+  actual data below firmware 3.2 — this happens regardless of which
+  `point_type` is selected, since the field layout is chosen by
+  `udp_profile_lidar`, not `point_type`. Our unit at the Karbon is on
+  firmware 3.0.1 and hits this. Two options: upgrade the sensor firmware to
+  3.2+ (real fix), or add `udp_profile_lidar:=LEGACY` to the launch command
+  as a workaround — the `LEGACY` profile's field layout doesn't reference
+  `WINDOW` and is supported by all firmware versions, at the cost of losing
+  the newer profile's ambient/reflectivity encoding.
