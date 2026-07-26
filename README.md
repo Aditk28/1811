@@ -146,6 +146,47 @@ the host — same name, same behavior.
 
 ---
 
+## Running the Ouster lidar driver
+
+The Ouster ROS 2 driver (`ouster_ros` / `ouster_sensor_msgs`) is vendored as a
+git submodule at `ros2_ws/src/ouster-ros` (upstream `ros2` branch), not
+hand-written code in this repo. After cloning or pulling changes that touch
+it, fetch the submodule (and its own nested `ouster-sdk` submodule):
+
+```bash
+git submodule update --init --recursive
+```
+
+The image now includes the driver's build dependencies (`libeigen3-dev`,
+`libjsoncpp-dev`, `libspdlog-dev`, `libcurl4-openssl-dev`,
+`ros-humble-tf2-eigen`, `ros-humble-rviz2`), so a normal workspace build picks
+it up:
+
+```bash
+cd /vehicle_1811/ros2_ws
+colcon build --symlink-install
+source install/setup.bash
+```
+
+Connect to the sensor (host networking is already on via `docker-compose.yml`,
+which the driver needs for UDP lidar/IMU packets):
+
+```bash
+ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip-or-hostname>
+```
+
+This publishes point clouds to `/ouster/points` and IMU data to `/ouster/imu`.
+Verify with:
+
+```bash
+ros2 topic hz /ouster/points
+rviz2   # or: ros2 launch ouster_ros rviz.launch.xml
+```
+
+Note: `lidar_perception` (this repo's own package) has no source yet — it's
+an empty skeleton. This driver is a separate, independent package; nothing in
+`lidar_perception` consumes its output yet.
+
 ## Serial protocol (Karbon <-> Arduino)
 
 JSON, newline-terminated, **57600 baud**.
