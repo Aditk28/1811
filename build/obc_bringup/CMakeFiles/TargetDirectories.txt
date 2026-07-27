@@ -1,9 +1,0 @@
-/vehicle_1811/build/obc_bringup/CMakeFiles/uninstall.dir
-/vehicle_1811/build/obc_bringup/CMakeFiles/obc_bringup_uninstall.dir
-/vehicle_1811/build/obc_bringup/CMakeFiles/test.dir
-/vehicle_1811/build/obc_bringup/CMakeFiles/edit_cache.dir
-/vehicle_1811/build/obc_bringup/CMakeFiles/rebuild_cache.dir
-/vehicle_1811/build/obc_bringup/CMakeFiles/list_install_components.dir
-/vehicle_1811/build/obc_bringup/CMakeFiles/install.dir
-/vehicle_1811/build/obc_bringup/CMakeFiles/install/local.dir
-/vehicle_1811/build/obc_bringup/CMakeFiles/install/strip.dir

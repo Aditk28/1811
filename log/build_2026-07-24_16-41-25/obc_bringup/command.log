@@ -1,6 +1,0 @@
-Invoking command in '/vehicle_1811/build/obc_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/obc_bringup -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/obc_bringup
-Invoked command in '/vehicle_1811/build/obc_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/obc_bringup -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/obc_bringup
-Invoking command in '/vehicle_1811/build/obc_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/obc_bringup -- -j24 -l24
-Invoked command in '/vehicle_1811/build/obc_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/obc_bringup -- -j24 -l24
-Invoking command in '/vehicle_1811/build/obc_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/obc_bringup
-Invoked command in '/vehicle_1811/build/obc_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/obc_bringup

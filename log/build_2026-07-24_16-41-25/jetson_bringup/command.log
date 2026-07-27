@@ -1,6 +1,0 @@
-Invoking command in '/vehicle_1811/build/jetson_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/jetson_bringup -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/jetson_bringup
-Invoked command in '/vehicle_1811/build/jetson_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /vehicle_1811/ros2_ws/src/jetson_bringup -DCMAKE_INSTALL_PREFIX=/vehicle_1811/install/jetson_bringup
-Invoking command in '/vehicle_1811/build/jetson_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/jetson_bringup -- -j24 -l24
-Invoked command in '/vehicle_1811/build/jetson_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /vehicle_1811/build/jetson_bringup -- -j24 -l24
-Invoking command in '/vehicle_1811/build/jetson_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/jetson_bringup
-Invoked command in '/vehicle_1811/build/jetson_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /vehicle_1811/build/jetson_bringup

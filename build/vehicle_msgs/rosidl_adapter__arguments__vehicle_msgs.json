@@ -1,9 +1,0 @@
-{
-  "package_name": "vehicle_msgs",
-  "non_idl_tuples": [
-    "/vehicle_1811/ros2_ws/src/vehicle_msgs:msg/VehicleCommand.msg",
-    "/vehicle_1811/ros2_ws/src/vehicle_msgs:msg/VehicleState.msg",
-    "/vehicle_1811/ros2_ws/src/vehicle_msgs:msg/Detection.msg",
-    "/vehicle_1811/ros2_ws/src/vehicle_msgs:msg/DetectionArray.msg"
-  ]
-}
