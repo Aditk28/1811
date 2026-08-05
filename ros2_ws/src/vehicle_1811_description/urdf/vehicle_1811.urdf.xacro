@@ -78,8 +78,9 @@
        On this vehicle the lidar sits a few inches ABOVE the camera plane, so
        lidar_z is meaningfully larger than cam_plane_z. Measure each to the
        sensor's actual optical origin, not to the mounting bracket. -->
-  <xacro:property name="cam_plane_z" value="0.47"/>   <!-- TODO-MEASURE  camera lens height above ground -->
-  <xacro:property name="lidar_z"     value="0.60"/>   <!-- TODO-MEASURE (CRITICAL) lidar optical-origin height; a few inches above cam_plane_z -->
+  <xacro:property name="cam_plane_z" value="1.057"/>   <!-- TODO-MEASURE  camera lens height above ground -->
+  <xacro:property name="lidar_z"     value="1.27"/>   <!-- TODO NEED TO FIX, not center point -->
+   <!-- TODO-MEASURE (CRITICAL) lidar optical-origin height; a few inches above cam_plane_z -->
 
   <!-- ===================== BASE FRAME ===========================
        base_footprint = the flat ground projection many stacks expect.
