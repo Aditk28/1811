@@ -1,5 +1,11 @@
 # 1811 Vehicle Software
 
+> **Architecture note:** 1811 runs on **two on-board computers** — the Karbon 800
+> (Ouster lidar + Arduino) and the Jetson Orin (4× ZED X cameras + most fusion/ROS
+> work), joined by an Ethernet link into one ROS 2 graph. Read
+> [`docs/compute_and_sensor_topology.md`](docs/compute_and_sensor_topology.md)
+> before wiring up anything that consumes lidar and camera data together.
+
 ## Docker (this is how everything runs now — Karbon, Windows laptop, or any dev machine)
 
 All ROS 2 code in this repo runs inside a Docker container built from `ros:humble`.
