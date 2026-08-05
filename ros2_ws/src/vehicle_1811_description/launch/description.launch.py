@@ -13,7 +13,7 @@ from launch import LaunchDescription
 from launch.substitutions import Command, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-
+from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
     xacro_path = PathJoinSubstitution([
@@ -25,7 +25,7 @@ def generate_launch_description():
             package="robot_state_publisher",
             executable="robot_state_publisher",
             output="screen",
-            parameters=[{"robot_description": Command(["xacro ", xacro_path])}],
+            parameters=[{"robot_description": ParameterValue(Command(["xacro ", xacro_path]), value_type=str)}],
         ),
         # No encoders yet -> publish a static zero joint state so wheel TFs exist.
         Node(

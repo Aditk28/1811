@@ -13,7 +13,7 @@ from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-
+from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
     pkg = FindPackageShare("vehicle_1811_description")
@@ -21,7 +21,7 @@ def generate_launch_description():
     rviz_path = PathJoinSubstitution([pkg, "rviz", "vehicle.rviz"])
 
     robot_description = {
-        "robot_description": Command(["xacro ", xacro_path])
+        "robot_description": ParameterValue(Command(["xacro ", xacro_path]), value_type=str)
     }
 
     return LaunchDescription([
