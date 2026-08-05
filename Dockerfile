@@ -10,6 +10,11 @@ RUN apt-get update && apt-get install -y \
     ros-humble-pcl-ros \
     ros-humble-tf2-eigen \
     ros-humble-rviz2 \
+    ros-humble-xacro \
+    ros-humble-robot-state-publisher \
+    ros-humble-joint-state-publisher \
+    ros-humble-joint-state-publisher-gui \
+    ros-humble-tf2-tools \
     build-essential \
     libeigen3-dev \
     libjsoncpp-dev \
