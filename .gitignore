@@ -1,9 +1,19 @@
-cd ~/1811
-cat > .gitignore << 'EOF'
+# ROS 2 / colcon build artifacts (workspace)
 ros2_ws/build/
 ros2_ws/install/
 ros2_ws/log/
+
+# colcon artifacts if ever run from the repo root by mistake (wrong-arch on Jetson)
+/build/
+/install/
+/log/
+
+# Python
 *.pyc
 __pycache__/
+
+# Editors
 .vscode/
-EOF
+
+# Machine-specific DDS profile (different peer/interface IPs per machine — never commit)
+config/fastdds_cable.xml
