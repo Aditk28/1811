@@ -79,7 +79,7 @@
        lidar_z is meaningfully larger than cam_plane_z. Measure each to the
        sensor's actual optical origin, not to the mounting bracket. -->
   <xacro:property name="cam_plane_z" value="1.057"/>   <!-- TODO-MEASURE  camera lens height above ground -->
-  <xacro:property name="lidar_z"     value="1.27"/>   <!-- TODO NEED TO FIX, not center point -->
+  <xacro:property name="lidar_z"     value="1.205"/>   <!-- TODO NEED TO FIX, not center point -->
    <!-- TODO-MEASURE (CRITICAL) lidar optical-origin height; a few inches above cam_plane_z -->
 
   <!-- ===================== BASE FRAME ===========================
@@ -127,11 +127,11 @@
                     bug later. Get this to zero physically, or measure it.
        DONE-WHEN: overlay live /ouster/points on the model in RViz; the ground
        must be flat and walls vertical. -->
-  <xacro:property name="lidar_x" value="0.25"/>  <!-- TODO-MEASURE (CRITICAL) lidar fwd of rear axle, along x -->
-  <xacro:property name="lidar_y" value="0.00"/>  <!-- TODO-MEASURE (CRITICAL) lidar lateral offset, +y=left, 0=centreline -->
+  <xacro:property name="lidar_x" value="0.006"/>  <!-- TODO-MEASURE (CRITICAL) lidar fwd of rear axle, along x -->
+  <xacro:property name="lidar_y" value="-0.147"/>  <!-- TODO-MEASURE (CRITICAL) lidar lateral offset, +y=left, 0=centreline -->
   <xacro:ouster_os1 parent="base_link"
                     x="${lidar_x}" y="${lidar_y}" z="${lidar_z}"
-                    roll="0" pitch="0" yaw="0"/>   <!-- TODO-MEASURE (CRITICAL) mounting roll/pitch/yaw in radians -->
+                    roll="0" pitch="0" yaw="-0.079"/>   <!-- TODO-MEASURE (CRITICAL) mounting roll/pitch/yaw in radians -->
 
   <!-- ===================== CAMERAS (4x ZED X) ===================
        These four give ~360deg coverage. They are NOT a perfect ring — on this
@@ -140,8 +140,8 @@
 
        Reference for every number below: the ZED X body origin relative to
        base_link (rear axle, ground). +x fwd, +y left. All four share
-       cam_plane_z for height and cam_pitch for down-tilt unless one is mounted
-       differently — if so, pass a per-camera z / pitch on that line.
+       cam_plane_z for height, but each camera has its OWN pitch (down-tilt)
+       below — e.g. the rear camera is tilted down more than the others.
 
        yaw aims each lens outward (the optical +Z points the way the camera
        looks): front=0, left=+pi/2, rear=pi, right=-pi/2. Adjust a yaw if a
@@ -149,34 +149,40 @@
 
        Phase two: rough tape-measure is fine now; you'll replace these with
        checkerboard-calibrated extrinsics before fusing camera + lidar. -->
-  <xacro:property name="cam_pitch" value="0.0"/>   <!-- TODO-MEASURE  shared camera down-tilt, + = nose down -->
+  <!-- Each camera has its OWN down-tilt (pitch). + = nose DOWN (lens toward the
+       ground), - = nose up. Enter degrees with ${radians(N)} if you prefer,
+       e.g. pitch="${radians(15)}" for a 15deg downward tilt. -->
 
   <!-- FRONT camera (looks +x). -->
-  <xacro:property name="cam_front_x" value="0.35"/>  <!-- TODO-MEASURE  fwd of rear axle -->
-  <xacro:property name="cam_front_y" value="0.00"/>  <!-- TODO-MEASURE  lateral offset, +y=left -->
+  <xacro:property name="cam_front_x"     value="0.190"/>  <!-- TODO-MEASURE  fwd of rear axle -->
+  <xacro:property name="cam_front_y"     value="-0.145"/> <!-- TODO-MEASURE  lateral offset, +y=left -->
+  <xacro:property name="cam_front_pitch" value="0.113"/>    <!-- TODO-MEASURE  down-tilt, + = nose down -->
   <xacro:zed_x_camera name="front" parent="base_link"
         x="${cam_front_x}" y="${cam_front_y}" z="${cam_plane_z}"
-        roll="0" pitch="${cam_pitch}" yaw="0"/>
+        roll="0" pitch="${cam_front_pitch}" yaw="0"/>
 
   <!-- LEFT camera (looks +y). -->
-  <xacro:property name="cam_left_x" value="0.25"/>   <!-- TODO-MEASURE  fwd of rear axle -->
-  <xacro:property name="cam_left_y" value="0.40"/>   <!-- TODO-MEASURE  lateral offset, +y=left -->
+  <xacro:property name="cam_left_x"     value="0.025"/>   <!-- TODO-MEASURE  fwd of rear axle -->
+  <xacro:property name="cam_left_y"     value="0.02"/>    <!-- TODO-MEASURE  lateral offset, +y=left -->
+  <xacro:property name="cam_left_pitch" value="0.01"/>     <!-- TODO-MEASURE  down-tilt, + = nose down -->
   <xacro:zed_x_camera name="left" parent="base_link"
         x="${cam_left_x}" y="${cam_left_y}" z="${cam_plane_z}"
-        roll="0" pitch="${cam_pitch}" yaw="${ pi/2}"/>
+        roll="0" pitch="${cam_left_pitch}" yaw="${ pi/2}"/>
 
-  <!-- REAR camera (looks -x). -->
-  <xacro:property name="cam_rear_x" value="0.15"/>   <!-- TODO-MEASURE  fwd of rear axle (may be behind it -> negative) -->
-  <xacro:property name="cam_rear_y" value="0.00"/>   <!-- TODO-MEASURE  lateral offset, +y=left -->
+  <!-- REAR camera (looks -x). Tilted down more than the others. -->
+  <xacro:property name="cam_rear_x"     value="-0.165"/>  <!-- TODO-MEASURE  fwd of rear axle (may be behind it -> negative) -->
+  <xacro:property name="cam_rear_y"     value="-0.145"/>   <!-- TODO-MEASURE  lateral offset, +y=left -->
+  <xacro:property name="cam_rear_pitch" value="0.097"/>     <!-- TODO-MEASURE  down-tilt, + = nose down (set larger than the rest) -->
   <xacro:zed_x_camera name="rear" parent="base_link"
         x="${cam_rear_x}" y="${cam_rear_y}" z="${cam_plane_z}"
-        roll="0" pitch="${cam_pitch}" yaw="${ pi}"/>
+        roll="0" pitch="${cam_rear_pitch}" yaw="${ pi}"/>
 
   <!-- RIGHT camera (looks -y). -->
-  <xacro:property name="cam_right_x" value="0.25"/>  <!-- TODO-MEASURE  fwd of rear axle -->
-  <xacro:property name="cam_right_y" value="-0.40"/> <!-- TODO-MEASURE  lateral offset, -y=right -->
+  <xacro:property name="cam_right_x"     value="0.025"/>  <!-- TODO-MEASURE  fwd of rear axle -->
+  <xacro:property name="cam_right_y"     value="-0.294"/> <!-- TODO-MEASURE  lateral offset, -y=right -->
+  <xacro:property name="cam_right_pitch" value="0.04"/>    <!-- TODO-MEASURE  down-tilt, + = nose down -->
   <xacro:zed_x_camera name="right" parent="base_link"
         x="${cam_right_x}" y="${cam_right_y}" z="${cam_plane_z}"
-        roll="0" pitch="${cam_pitch}" yaw="${-pi/2}"/>
+        roll="0" pitch="${cam_right_pitch}" yaw="${-pi/2}"/>
 
 </robot>
