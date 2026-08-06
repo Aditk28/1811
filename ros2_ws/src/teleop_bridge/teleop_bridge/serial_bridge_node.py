@@ -13,7 +13,7 @@ class SerialBridgeNode(Node):
     def __init__(self):
         super().__init__('serial_bridge_node')
         self.declare_parameter('port', '/dev/ttyACM0')
-        self.declare_parameter('baud', 115200)
+        self.declare_parameter('baud', 57600)
         port = self.get_parameter('port').value
         baud = self.get_parameter('baud').value
 

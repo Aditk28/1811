@@ -8,5 +8,5 @@ def generate_launch_description():
              parameters=[{'deadzone': 0.05}]),
         Node(package='teleop_bridge', executable='gamepad_node', name='gamepad_node'),
         Node(package='teleop_bridge', executable='serial_bridge_node', name='serial_bridge_node',
-             parameters=[{'port': '/dev/ttyACM0', 'baud': 115200}]),
+             parameters=[{'port': '/dev/ttyACM0', 'baud': 57600}]),
     ])
