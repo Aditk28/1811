@@ -62,6 +62,36 @@ bearing to the next waypoint.
 Once `route_publisher` exists, run without `path_file` (or override it to
 `''`) to subscribe `/planning/path` instead — no code changes needed.
 
+## Bench test through serial_bridge (real Arduino, no mode_manager)
+
+`serial_bridge_node` already subscribes `vehicle_msgs/VehicleCommand` and
+writes the `{"speed", "steering", "braking"}` JSON line to the Arduino —
+that's the same code path `gamepad_node` drives today. Pointing
+pure_pursuit_node's output at that topic instead of `/cmd/auto` reuses it
+directly, no new code:
+
+```bash
+ros2 launch control pure_pursuit.launch.py cmd_topic:=/vehicle_command \
+    path_file:=/path/to/your.csv
+```
+
+>>> **This bypasses `mode_manager`'s deadman switch entirely** (it isn't
+built yet). There is nothing that brakes the car if something goes wrong
+except you. Before running this against real hardware:
+- [ ] Wheels **off the ground** for the first run.
+- [ ] Spotter present; hand on the **kill switch**.
+- [ ] Confirm the firmware watchdog brakes on stale serial (per the guide's
+      prerequisites) — it's your only automatic backstop here.
+- [ ] `serial_bridge_node` must be the *only* thing opening the port — don't
+      also run `gamepad_node` remapped to `/vehicle_command` at the same
+      time, and don't run this alongside a second serial writer.
+- [ ] Low `target_speed_mps` (the config default, ~2 mph) until you trust it.
+
+This is a deliberately temporary shortcut for bench/blocks testing before
+`mode_manager` exists — not something to leave wired for an unattended or
+routine drive. See the [risks table](../../../docs/teach_and_repeat_guide.md#risks--fallbacks)
+in the guide for why the deadman exists.
+
 ## Calibration TODOs before this touches the real vehicle
 
 These are placeholders, not measurements. `config/pure_pursuit.yaml` flags
