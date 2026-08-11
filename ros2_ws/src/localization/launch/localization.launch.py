@@ -5,16 +5,15 @@ stack's canonical /odometry, with the odom->base_link TF. Uses base_link so the
 pose is the VEHICLE's, not the sensor's — that mapping comes from the URDF
 (vehicle_1811_description: base_link -> os_sensor -> os_lidar).
 
-    ros2 launch localization localization.launch.py
+    ros2 launch localization localization.launch.py                     # live
+    ros2 launch localization localization.launch.py use_sim_time:=true  # bag replay (with --clock)
 
->>> VERSION DRIFT WARNING <<<
-KISS-ICP's launch argument names AND its output odometry topic name change
-between releases. Before trusting this file, check YOUR checkout:
-
-    ros2 launch kiss_icp odometry.launch.py -s      # list the real arguments
-    ros2 topic list | grep -i odom                  # find the real odom topic
-
-Then, if needed, adjust the launch_arguments below and the SetRemap 'src'.
+Locked to the KISS-ICP version vendored in ros2_ws/src/kiss-icp:
+  - odom frame arg is `lidar_odom_frame` (not `odom_frame`)
+  - `use_sim_time` MUST be false for a live sensor (default true = waits for /clock)
+  - kiss_icp publishes on /kiss/odometry -> remapped to /odometry here
+If you bump the kiss-icp submodule and it stops working, re-check the arg names
+in ros2_ws/src/kiss-icp/ros/launch/odometry.launch.py.
 """
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
@@ -26,6 +25,8 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     pointcloud_topic = LaunchConfiguration("pointcloud_topic")
+    use_sim_time = LaunchConfiguration("use_sim_time")
+    config_file = LaunchConfiguration("config_file")
 
     kiss_icp_launch = PathJoinSubstitution(
         [FindPackageShare("kiss_icp"), "launch", "odometry.launch.py"]
@@ -37,22 +38,32 @@ def generate_launch_description():
             default_value="/ouster/points",
             description="Input lidar point cloud topic (from ouster-ros).",
         ),
+        DeclareLaunchArgument(
+            "use_sim_time",
+            default_value="false",
+            description="false for a live sensor; true for bag replay (ros2 bag play --clock).",
+        ),
+        DeclareLaunchArgument(
+            "config_file",
+            default_value=PathJoinSubstitution(
+                [FindPackageShare("localization"), "config", "kiss_icp.yaml"]
+            ),
+            description="KISS-ICP params. Defaults to the 1811 tuning in this package.",
+        ),
 
-        # KISS-ICP publishes odometry on /kiss/odometry in most versions.
-        # Remap it to the stack's canonical /odometry so everything downstream
-        # (routing, control) shares one name. SetRemap applies to the included
-        # launch below. If your checkout already publishes /odometry, delete this
-        # line; if it uses a different name, fix 'src' to match `ros2 topic list`.
+        # kiss_icp publishes odometry on /kiss/odometry; make it the stack's /odometry.
         SetRemap(src="/kiss/odometry", dst="/odometry"),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([kiss_icp_launch]),
             launch_arguments={
-                "topic": pointcloud_topic,
-                "base_frame": "base_link",     # report the VEHICLE pose (URDF)
-                "odom_frame": "odom",
-                "publish_odom_tf": "true",     # KISS-ICP owns odom->base_link
-                "visualize": "false",          # headless on the Karbon; view via RViz on the Jetson
+                "topic": pointcloud_topic,          # remapped to the node's pointcloud_topic
+                "base_frame": "base_link",          # report the VEHICLE pose (URDF)
+                "lidar_odom_frame": "odom",         # fixed odometry frame
+                "publish_odom_tf": "true",          # kiss_icp owns odom->base_link
+                "visualize": "false",               # headless on the Karbon; RViz on the Jetson
+                "use_sim_time": use_sim_time,
+                "config_file": config_file,
             }.items(),
         ),
     ])

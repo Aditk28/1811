@@ -1,19 +1,22 @@
-# Reference KISS-ICP tuning for the 1811 vehicle (Ouster OS1-128, ~2-5 mph).
+# 1811 KISS-ICP tuning. Loaded by localization.launch.py via config_file.
 #
-# NOTE: whether the launch auto-loads this file depends on the KISS-ICP version.
-# Check `ros2 launch kiss_icp odometry.launch.py -s` for a `config_file` arg:
-#   - if present:  pass config_file:=$(ros2 pkg prefix localization)/share/localization/config/kiss_icp.yaml
-#   - if absent:   set the relevant values as launch args / node params instead.
-# Param KEY NAMES also drift between versions — verify against your checkout.
+# Structure MIRRORS kiss-icp's own ros/config/config.yaml (node name + nested
+# groups) — keep it in sync if you bump the submodule.
 #
-# These are sane starting points, not tuned values. Adjust after B2 drift eval.
-/**:
+# Do NOT set base_frame / lidar_odom_frame / publish_odom_tf here: those are set
+# by the launch args, and values in this file would OVERRIDE the launch.
+kiss_icp_node:
   ros__parameters:
-    max_range: 100.0          # m — ignore returns beyond this (OS1-128 useful range)
-    min_range: 0.5            # m — drop near-field self-hits (mast, body)
-    deskew: true             # motion-compensate points within one scan
-    voxel_size: 1.0          # m — local-map downsample (KISS-ICP default ~1.0)
-    max_points_per_voxel: 20
-    # Adaptive data-association threshold seeds (usually fine at defaults):
-    initial_threshold: 2.0
-    min_motion_th: 0.1
+    data:
+      deskew: true
+      max_range: 100.0
+      min_range: 1.0          # 1811: drop near-field self-returns (mast/body). Upstream default is 0.0.
+    mapping:
+      max_points_per_voxel: 20
+    adaptive_threshold:
+      initial_threshold: 2.0
+      min_motion_th: 0.1
+    registration:
+      max_num_iterations: 500
+      convergence_criterion: 0.0001
+      max_num_threads: 0       # 0 = auto

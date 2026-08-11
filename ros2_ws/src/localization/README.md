@@ -64,15 +64,21 @@ accumulated point cloud **crisp** — walls stay thin lines, not smeared — and
 
 ## Version drift — the thing that will trip you up
 
-KISS-ICP's launch **argument names** and its **output odometry topic** change
-between releases. This wrapper assumes the common layout (`topic`, `base_frame`,
-`odom_frame`, `publish_odom_tf`, `visualize`, and output on `/kiss/odometry`).
-Verify against your checkout and adjust
-[`launch/localization.launch.py`](launch/localization.launch.py):
+This wrapper is **locked to the vendored kiss-icp version** (confirmed against
+`ros2_ws/src/kiss-icp/ros/launch/odometry.launch.py`):
+- odom-frame arg is **`lidar_odom_frame`** (not `odom_frame`)
+- **`use_sim_time` must be `false` for a live sensor** (default is `true`, which
+  makes the node wait for a `/clock` that never comes → silent, no odometry)
+- kiss_icp publishes on **`/kiss/odometry`** → remapped to `/odometry` here
+
+Note: `ros2 launch kiss_icp odometry.launch.py -s` prints "No arguments" because
+the args are declared inside an `OpaqueFunction` — that's a display quirk, the
+args still work. If you bump the submodule and it breaks, re-read that launch
+file for renamed args and fix [`launch/localization.launch.py`](launch/localization.launch.py):
 
 ```bash
-ros2 launch kiss_icp odometry.launch.py -s     # real argument names
-ros2 topic list | grep -i odom                 # real odom topic (fix the SetRemap 'src')
+cat ros2_ws/src/kiss-icp/ros/launch/odometry.launch.py   # arg names
+ros2 topic list | grep -i odom                           # odom topic (fix SetRemap 'src')
 ```
 
 ## Contract
