@@ -3,21 +3,24 @@ from rclpy.node import Node
 from sensor_msgs.msg import Joy
 from vehicle_msgs.msg import VehicleCommand
 
-# --- Axis mapping ---
-# These indices/signs are controller-dependent. Verify with:
-#   ros2 topic echo /joy
-# while moving each control individually, then adjust the values below
-# until they match your actual controller.
+# --- Axis mapping (8Bitdo SN30 Pro, verified via `ros2 topic echo /joy`) ---
+#   axes[0] left stick  X      axes[1] left stick  Y  -> throttle
+#   axes[2] right stick X  -> steering
+#   axes[3] right stick Y      axes[4] right trigger
+#   axes[5] left trigger   -> brake
 AXIS_LEFT_STICK_Y = 1     # left stick vertical  -> throttle
-AXIS_RIGHT_STICK_X = 3    # right stick horizontal -> steering
-AXIS_LEFT_TRIGGER = 2     # left trigger -> brake
+AXIS_RIGHT_STICK_X = 2    # right stick horizontal -> steering
+AXIS_LEFT_TRIGGER = 5     # left trigger -> brake
 
-INVERT_THROTTLE = False   # flip to True if pushing the stick up drives backward
-INVERT_STEER = False      # flip to True if right on the stick steers left
+# VERIFY THESE TWO with `ros2 topic echo /vehicle_command` (see below):
+INVERT_THROTTLE = False   # verified on the SN30 Pro: up = forward.
+INVERT_STEER = True       # verified on the SN30 Pro: right = right.
 
-# Most Linux joystick drivers report triggers resting at +1.0 (released)
-# and -1.0 (fully pressed). If yours instead rests at 0.0 and rises to 1.0
-# when pressed, set this to False.
+# >>> IMPORTANT: set this from what axes[5] reads AT REST in `ros2 topic echo /joy` <<<
+#   - rests at ~0.0, rises toward 1.0 when pressed  -> False
+#   - rests at ~+1.0, falls toward -1.0 when pressed -> True  (verified on this pad)
+# If this is wrong, brake reads ~0.5 at rest, braking stays on, and throttle is
+# permanently forced to 0 (the car will refuse to move). So check it.
 TRIGGER_RESTS_AT_PLUS_ONE = True
 
 DEADZONE = 0.05

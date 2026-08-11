@@ -11,6 +11,10 @@ RUN apt-get update && apt-get install -y \
     ros-humble-tf2-eigen \
     ros-humble-rviz2 \
     ros-humble-xacro \
+    ros-humble-joy \
+    python3-serial \
+    python3-pygame \
+    ros-humble-rmw-cyclonedds-cpp \
     ros-humble-robot-state-publisher \
     ros-humble-joint-state-publisher \
     ros-humble-joint-state-publisher-gui \
