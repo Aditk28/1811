@@ -6,7 +6,7 @@ import serial
 from rclpy.node import Node
 from vehicle_msgs.msg import VehicleCommand, VehicleState
 
-MAX_SPEED_MPH = 20.0  # TODO: set this to your vehicle's actual max speed
+MAX_SPEED_MPH = 5.0  # lowered for bench/first-drive testing; raise once trusted
 
 
 class SerialBridgeNode(Node):
@@ -38,9 +38,9 @@ class SerialBridgeNode(Node):
         self.ser.write(line.encode('ascii'))
 
     def _read_loop(self):
-        # NOTE: this assumes the firmware also sends state back over serial.
-        # If it doesn't (yet), this loop just quietly does nothing useful —
-        # confirm with your firmware what (if anything) it reports back.
+        # The firmware may send nothing, a JSON object, or (as observed) bare
+        # numbers / debug text. Parse defensively so a stray line never kills
+        # this thread and silently stops state read-back.
         while not self._stop and rclpy.ok():
             try:
                 line = self.ser.readline().decode('ascii', errors='ignore').strip()
@@ -52,7 +52,16 @@ class SerialBridgeNode(Node):
             try:
                 data = json.loads(line)
             except json.JSONDecodeError:
-                self.get_logger().warn(f'Malformed JSON from Arduino: {line!r}')
+                self.get_logger().warning(
+                    f'Non-JSON serial line, ignoring: {line!r}',
+                    throttle_duration_sec=5.0)
+                continue
+            # json.loads happily returns floats/ints/lists for lines like "2.5".
+            # We only handle JSON objects; skip anything else.
+            if not isinstance(data, dict):
+                self.get_logger().warning(
+                    f'Serial line is not a JSON object, ignoring: {line!r}',
+                    throttle_duration_sec=5.0)
                 continue
             state = VehicleState()
             state.header.stamp = self.get_clock().now().to_msg()
