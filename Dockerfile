@@ -31,6 +31,8 @@ RUN apt-get update && apt-get install -y \
     python3-colcon-common-extensions \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install --no-cache-dir "cmake>=3.24"
+
 RUN git config --global --add safe.directory /vehicle_1811
 
 WORKDIR /vehicle_1811

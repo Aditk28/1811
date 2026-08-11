@@ -2,3 +2,6 @@
 	path = ros2_ws/src/ouster-ros
 	url = https://github.com/ouster-lidar/ouster-ros.git
 	branch = ros2
+[submodule "ros2_ws/src/kiss-icp"]
+	path = ros2_ws/src/kiss-icp
+	url = https://github.com/PRBonn/kiss-icp.git
