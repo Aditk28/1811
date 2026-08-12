@@ -285,6 +285,129 @@ the defaults. The joystick device (e.g. `/dev/input/js0`) is passed through
 the same way serial devices are — via the `/dev` bind-mount — so no extra
 container config is needed once it shows up on the host.
 
+## Teach and repeat (record a route, then drive it back autonomously)
+
+Drive a loop once by hand while lidar odometry records it, then have the
+vehicle drive that same loop back on its own. Full design rationale in
+[`docs/teach_and_repeat_guide.md`](docs/teach_and_repeat_guide.md) /
+[`docs/teach_and_repeat_plan.md`](docs/teach_and_repeat_plan.md) — this
+section is the condensed, ties-it-all-together how-to.
+
+### What's built vs. not
+
+| Piece | Package | Status |
+|---|---|---|
+| Lidar odometry (`/odometry`) | `localization` (wraps KISS-ICP) | ✅ built |
+| Record a route while driving manually | `routing` (`route_recorder_node`) | ✅ built |
+| Republish a saved route as `/planning/path` | `routing` (`route_publisher`) | ❌ not built — not needed for a first cycle, see below |
+| Drive a route autonomously | `control` (`pure_pursuit_node`) | ✅ built |
+| Arbitrate manual/autonomous, deadman switch | `guardian` (`mode_manager`) | ❌ not built |
+| Arduino brakes on a stale/dead command stream | firmware | ❌ **not enabled** — see [Known issues](#known-issues--things-to-watch) |
+
+### ⚠️ Read this before running REPEAT (autonomous) on real hardware
+
+Autonomous driving today has **no automatic safety backstop of any kind**:
+
+- **No firmware watchdog.** `checkStaleness()` exists in the Arduino code but
+  isn't enabled. If the command stream stops for *any* reason —
+  `pure_pursuit_node` crashing, `serial_bridge_node` dying, a network
+  hiccup — the firmware keeps executing the **last command it received,
+  forever**. It does not brake on its own.
+- **No `mode_manager`, no deadman switch.** Nothing requires a held button
+  to keep the vehicle driving autonomously, and nothing arbitrates between
+  manual and autonomous commands.
+- `pure_pursuit_node`'s own internal safety net (publishes zero throttle if
+  its path hasn't loaded or `/odometry` goes stale) only protects against
+  *those two specific failures*, and only while `pure_pursuit_node` itself
+  is still alive. It cannot protect you from the process dying outright or
+  the link to `serial_bridge_node` breaking.
+
+**A human at the kill switch is the only thing standing in for the missing
+watchdog and the missing deadman.** Treat every REPEAT run as "manual
+driving with a robot doing the steering," never as something to walk away
+from. Wheels off the ground for the first run of anything new; spotter
+present; start slow.
+
+### The cycle
+
+```bash
+docker compose run --rm dev bash
+cd /vehicle_1811/ros2_ws
+colcon build --packages-select routing control
+source install/setup.bash
+```
+
+**Terminal 1 — lidar:**
+```bash
+ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip> viz:=false
+```
+
+**Terminal 2 — odometry (do not restart this until REPEAT is completely done):**
+```bash
+ros2 launch localization localization.launch.py
+```
+Restarting this between TEACH and REPEAT moves the `odom` frame's origin —
+the recorded route silently stops matching reality, with no error. See
+`routing`'s README for why.
+
+**Terminal 3 — TEACH: start recording:**
+```bash
+ros2 launch routing route_recorder.launch.py
+```
+
+**Terminals 4+ — actually drive the car.** `route_recorder_node` only
+*listens* to `/odometry`; nothing about it moves the vehicle. You still
+need the full teleop chain running, same as any other manual drive —
+**`serial_bridge_node` is the only thing that ever opens the serial port**,
+so without it the wheels won't turn no matter what `gamepad_node` publishes.
+Gamepad (one command, starts `joy_node` + `gamepad_node` + `serial_bridge_node`
+together):
+```bash
+ros2 launch teleop_bridge teleop_bridge.launch.py
+```
+or keyboard (two terminals — see "Running teleop (keyboard...)" above for
+the full breakdown):
+```bash
+ros2 run teleop_bridge serial_bridge_node --ros-args -p port:=/dev/ttyACM0 -p baud:=57600
+ros2 run teleop_bridge keyboard_teleop_node
+```
+Drive the loop back to your starting spot.
+
+**Back in terminal 3 — save the route:**
+```bash
+ros2 service call /route_recorder_node/save std_srvs/srv/Trigger {}
+```
+This prints the saved file path (also logged by the node) — you'll need it
+for the next step. See `routing`'s README for exactly where this file lands
+and why.
+
+**REPEAT — safe first step, nothing moves, just watch the output:**
+```bash
+ros2 launch control pure_pursuit.launch.py path_file:=/vehicle_1811/routes/route_<timestamp>.csv
+ros2 topic echo /cmd/auto
+```
+`pure_pursuit_node` publishes to `/cmd/auto` by default, which nothing
+subscribes to yet (`mode_manager` isn't built) — so this step is pure
+observation. Confirm the steer/throttle values look sane as you push the
+car by hand before ever wiring output to the Arduino.
+
+**REPEAT — only once the above looks right, *and* you've re-read the
+warning above:**
+```bash
+ros2 launch control pure_pursuit.launch.py cmd_topic:=/vehicle_command \
+    path_file:=/vehicle_1811/routes/route_<timestamp>.csv
+```
+See `control`'s README, "Bench test through serial_bridge," for the full
+pre-flight checklist before doing this on the ground.
+
+### Not built yet
+
+`route_publisher` (turns a saved route into a live `/planning/path` topic —
+`pure_pursuit_node`'s `path_file` param sidesteps needing this for a first
+cycle), `mode_manager` (deadman-gated manual/autonomous arbitration), and
+enabling the firmware's `checkStaleness()` watchdog. The last one is a real
+prerequisite gap, not just a nice-to-have — see the warning above.
+
 ## WSL-specific setup (if running on a laptop instead of the Karbon)
 
 USB devices plugged into Windows aren't visible to WSL (or to Docker Desktop,

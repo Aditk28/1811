@@ -76,12 +76,19 @@ ros2 launch control pure_pursuit.launch.py cmd_topic:=/vehicle_command \
 ```
 
 >>> **This bypasses `mode_manager`'s deadman switch entirely** (it isn't
-built yet). There is nothing that brakes the car if something goes wrong
-except you. Before running this against real hardware:
+built yet) — **and the repo root [README](../../../README.md#known-issues--things-to-watch)
+confirms the Arduino has no working watchdog either**: `checkStaleness()`
+exists in the firmware but isn't enabled, so if the serial link goes stale
+for *any* reason (this node crashes, `serial_bridge_node` dies, a network
+hiccup), the firmware keeps executing the last command it received
+**indefinitely — it does not brake on its own**. There is currently no
+automatic backstop of any kind between "something goes wrong" and the car
+stopping. A human at the kill switch is the only thing standing in for both
+the missing deadman and the missing watchdog. Before running this against
+real hardware:
 - [ ] Wheels **off the ground** for the first run.
-- [ ] Spotter present; hand on the **kill switch**.
-- [ ] Confirm the firmware watchdog brakes on stale serial (per the guide's
-      prerequisites) — it's your only automatic backstop here.
+- [ ] Spotter present; hand on the **kill switch**, watching the whole time
+      — not just at the start.
 - [ ] `serial_bridge_node` must be the *only* thing opening the port — don't
       also run `gamepad_node` remapped to `/vehicle_command` at the same
       time, and don't run this alongside a second serial writer.

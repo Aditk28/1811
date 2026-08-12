@@ -37,7 +37,12 @@ class BicycleSimNode(Node):
         self.declare_parameter('start_y', 0.0)
         self.declare_parameter('start_yaw', 0.0)
         self.declare_parameter('rate', 50.0)
-        self.declare_parameter('cmd_timeout', 0.5)  # mirrors serial_bridge's watchdog
+        # s -- stop trusting a stale command. NOTE: the real firmware has no
+        # equivalent yet (repo root README's "Known issues": checkStaleness()
+        # exists but isn't enabled) -- this sim is more forgiving than real
+        # hardware right now, don't read a clean sim run as proof the vehicle
+        # itself will stop safely.
+        self.declare_parameter('cmd_timeout', 0.5)
 
         p = self.get_parameter
         self._wheelbase = p('wheelbase').value

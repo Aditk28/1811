@@ -19,6 +19,8 @@ services:
       - type: bind
         source: /dev
         target: /dev
+        bind:
+          propagation: rshared
       - type: bind
         source: /tmp/.X11-unix
         target: /tmp/.X11-unix
