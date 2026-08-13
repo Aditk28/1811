@@ -3,18 +3,20 @@ from rclpy.node import Node
 from sensor_msgs.msg import Joy
 from vehicle_msgs.msg import VehicleCommand
 
-# --- Axis mapping (8Bitdo SN30 Pro, verified via `ros2 topic echo /joy`) ---
-#   axes[0] left stick  X      axes[1] left stick  Y  -> throttle
-#   axes[2] right stick X  -> steering
-#   axes[3] right stick Y      axes[4] right trigger
-#   axes[5] left trigger   -> brake
-AXIS_LEFT_STICK_Y = 1     # left stick vertical  -> throttle
-AXIS_RIGHT_STICK_X = 2    # right stick horizontal -> steering
-AXIS_LEFT_TRIGGER = 5     # left trigger -> brake
+# --- Axis mapping (8Bitdo SN30 Pro over USB / WIRED, verified via `ros2 topic echo /joy`) ---
+#   axes[1] left stick  Y   -> throttle   (up = forward)
+#   axes[2] left trigger    -> brake      (rests at +1.0, falls to -1.0 when pressed)
+#   axes[4] right stick X   -> steering   (right = NEGATIVE on this pad)
+#   axes[5] right stick Y   -> (unused)
+# NOTE: wired (D-input) axis numbers DIFFER from Bluetooth. Over BT this pad used
+#       steering=axes[2], brake=axes[5]. These constants are for the WIRED connection.
+AXIS_LEFT_STICK_Y = 1     # left stick vertical    -> throttle
+AXIS_RIGHT_STICK_X = 3    # right stick horizontal -> steering
+AXIS_LEFT_TRIGGER = 2     # left trigger           -> brake
 
-# VERIFY THESE TWO with `ros2 topic echo /vehicle_command` (see below):
-INVERT_THROTTLE = False   # verified on the SN30 Pro: up = forward.
-INVERT_STEER = True       # verified on the SN30 Pro: right = right.
+INVERT_THROTTLE = False   # up = forward (unchanged).
+INVERT_STEER = True       # this pad reports right as negative; invert so right-stick = steer right.
+                          # If it steers the wrong way on the vehicle, flip to False.
 
 # >>> IMPORTANT: set this from what axes[5] reads AT REST in `ros2 topic echo /joy` <<<
 #   - rests at ~0.0, rises toward 1.0 when pressed  -> False

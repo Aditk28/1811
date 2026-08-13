@@ -6,7 +6,7 @@ import serial
 from rclpy.node import Node
 from vehicle_msgs.msg import VehicleCommand, VehicleState
 
-MAX_SPEED_MPH = 5.0  # lowered for bench/first-drive testing; raise once trusted
+MAX_SPEED_MPH = 12.5  # lowered for bench/first-drive testing; raise once trusted
 
 
 class SerialBridgeNode(Node):
