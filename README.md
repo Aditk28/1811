@@ -197,17 +197,6 @@ power-on — not by the cable.** Over Bluetooth this pad reported steering on
 another mode, a pad swap, or a repair:
 
 ```bash
-<<<<<<< HEAD
-ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=169.254.148.80 viz:=false udp_profile_lidar:=LEGACY
-```
-
-**Terminal 2 — robot description:**
-```bash
-ros2 launch vehicle_1811_description description.launch.py
-```
-
-**Terminal 3 — odometry (do not restart this until REPEAT is completely done):**
-=======
 ros2 topic echo /joy
 ```
 
@@ -246,14 +235,10 @@ ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip> viz:=false
 
 **Terminal 2** — odometry:
 
->>>>>>> 4beb8fbacf677a7e9476e54ee3d4a4acb8fdf48a
 ```bash
 ros2 launch localization localization.launch.py
 ```
 
-<<<<<<< HEAD
-**Terminal 4 — TEACH: start recording:**
-=======
 Verify:
 
 ```bash
@@ -286,36 +271,21 @@ ros2 launch localization localization.launch.py
 
 **Terminal 3** — start recording:
 
->>>>>>> 4beb8fbacf677a7e9476e54ee3d4a4acb8fdf48a
 ```bash
 ros2 launch routing route_recorder.launch.py
 ```
 
-<<<<<<< HEAD
-**Terminals 5+ — actually drive the car.** `route_recorder_node` only
-*listens* to `/odometry`; nothing about it moves the vehicle. You still
-need the full teleop chain running, same as any other manual drive —
-**`serial_bridge_node` is the only thing that ever opens the serial port**,
-so without it the wheels won't turn no matter what `gamepad_node` publishes.
-Gamepad (one command, starts `joy_node` + `gamepad_node` + `serial_bridge_node`
-together):
-=======
 **Terminal 4** — TEACH: drive the loop by hand. `route_recorder_node` only
 *listens* to `/odometry`; it does not move anything:
 
->>>>>>> 4beb8fbacf677a7e9476e54ee3d4a4acb8fdf48a
 ```bash
 ros2 launch teleop_bridge teleop_bridge.launch.py
 ```
 
-<<<<<<< HEAD
-**Back in terminal 4 — save the route:**
-=======
 Drive the loop, back to your starting spot.
 
 **Terminal 3** — save the route. Prints the file path you need next:
 
->>>>>>> 4beb8fbacf677a7e9476e54ee3d4a4acb8fdf48a
 ```bash
 ros2 service call /route_recorder_node/save std_srvs/srv/Trigger {}
 ```

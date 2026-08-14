@@ -40,15 +40,12 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'port',
-<<<<<<< HEAD
             default_value='/dev/ttyACM0',
             description='Arduino serial port. Enumeration-order dependent; prefer a '
                         'stable /dev/serial/by-id/... path (see header).',
-=======
-            default_value='auto',
-            description="Arduino serial port. 'auto' resolves via "
-                        '/dev/serial/by-id/; or pass an explicit path.',
->>>>>>> 4beb8fbacf677a7e9476e54ee3d4a4acb8fdf48a
+            # default_value='auto',
+            # description="Arduino serial port. 'auto' resolves via "
+            #             '/dev/serial/by-id/; or pass an explicit path.',
         ),
         DeclareLaunchArgument(
             'baud',
