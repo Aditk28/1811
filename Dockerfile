@@ -35,4 +35,24 @@ RUN pip3 install --no-cache-dir "cmake>=3.24"
 
 RUN git config --global --add safe.directory /vehicle_1811
 
-WORKDIR /vehicle_1811
+# Interactive shells land in the workspace, ROS 2 and the built overlay already
+# sourced -- no `cd` + two `source` lines at the top of every new terminal.
+#
+# The base ros:humble entrypoint sources /opt/ros/humble only; it knows nothing
+# about this repo's workspace, which is bind-mounted at runtime. So the overlay
+# has to be sourced here, and guarded: a fresh clone has no install/ yet, and an
+# unguarded source would error on every login.
+RUN printf '%s\n' \
+    '' \
+    '# --- 1811 ---' \
+    'source /opt/ros/humble/setup.bash' \
+    'if [ -f /vehicle_1811/ros2_ws/install/setup.bash ]; then' \
+    '    source /vehicle_1811/ros2_ws/install/setup.bash' \
+    'else' \
+    '    echo "[1811] workspace not built yet -- run: colcon build --symlink-install"' \
+    'fi' \
+    'cd /vehicle_1811/ros2_ws' \
+    "alias rebuild='colcon build --symlink-install && source install/setup.bash'" \
+    >> /root/.bashrc
+
+WORKDIR /vehicle_1811/ros2_ws
