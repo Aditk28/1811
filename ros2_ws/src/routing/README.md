@@ -85,14 +85,22 @@ ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<ip> viz:=false
 # terminal 2 -- odometry (do NOT restart this until REPEAT is done)
 ros2 launch localization localization.launch.py
 
-# terminal 3 -- TEACH: start recording, then drive the loop by hand
+# terminal 3 -- TEACH: start recording. LEAVE THIS RUNNING -- it's a live
+# node, not a one-shot command; killing it means there's nothing left to
+# receive the save call below.
 ros2 launch routing route_recorder.launch.py     # saves to /vehicle_1811/routes by default
-# (in another terminal) drive it: joy_node + teleop_bridge's gamepad_node/serial_bridge_node
-# when you're back at the start, either ctrl-c terminal 3 (auto-saves on
-# shutdown) or, to keep the node running for another take:
-ros2 service call /route_recorder_node/save std_srvs/srv/Trigger {}
 
-# terminal 3 (after saving) -- REPEAT: point pure_pursuit at the file it just wrote
+# terminal 4 -- drive it: joy_node + teleop_bridge's gamepad_node/serial_bridge_node
+
+# terminal 5 -- once you're back at the start, save WITHOUT stopping terminal 3
+# (a ROS2 service call needs the node it's calling to still be alive and
+# listening -- this fails/hangs if you ctrl-c terminal 3 first):
+ros2 service call /route_recorder_node/save std_srvs/srv/Trigger {}
+# now either ctrl-c terminal 3 (it also auto-saves on shutdown, as a fallback),
+# or leave it running and keep driving for another ~save later.
+
+# terminal 3 (only once you've ctrl-c'd it above) or any fresh terminal --
+# REPEAT: point pure_pursuit at the file terminal 5 just reported saving
 ros2 launch control pure_pursuit.launch.py path_file:=/vehicle_1811/routes/route_<timestamp>.csv
 ros2 topic echo /cmd/auto     # confirm sane output before ever wiring it to serial_bridge
 ```

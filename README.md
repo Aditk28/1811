@@ -339,10 +339,15 @@ source install/setup.bash
 
 **Terminal 1 — lidar:**
 ```bash
-ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip> viz:=false
+ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=169.254.148.80 viz:=false udp_profile_lidar:=LEGACY
 ```
 
-**Terminal 2 — odometry (do not restart this until REPEAT is completely done):**
+**Terminal 2 — robot description:**
+```bash
+ros2 launch vehicle_1811_description description.launch.py
+```
+
+**Terminal 3 — odometry (do not restart this until REPEAT is completely done):**
 ```bash
 ros2 launch localization localization.launch.py
 ```
@@ -350,12 +355,12 @@ Restarting this between TEACH and REPEAT moves the `odom` frame's origin —
 the recorded route silently stops matching reality, with no error. See
 `routing`'s README for why.
 
-**Terminal 3 — TEACH: start recording:**
+**Terminal 4 — TEACH: start recording:**
 ```bash
 ros2 launch routing route_recorder.launch.py
 ```
 
-**Terminals 4+ — actually drive the car.** `route_recorder_node` only
+**Terminals 5+ — actually drive the car.** `route_recorder_node` only
 *listens* to `/odometry`; nothing about it moves the vehicle. You still
 need the full teleop chain running, same as any other manual drive —
 **`serial_bridge_node` is the only thing that ever opens the serial port**,
@@ -373,7 +378,7 @@ ros2 run teleop_bridge keyboard_teleop_node
 ```
 Drive the loop back to your starting spot.
 
-**Back in terminal 3 — save the route:**
+**Back in terminal 4 — save the route:**
 ```bash
 ros2 service call /route_recorder_node/save std_srvs/srv/Trigger {}
 ```

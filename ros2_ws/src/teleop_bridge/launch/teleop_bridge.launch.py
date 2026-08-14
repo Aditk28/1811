@@ -27,7 +27,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'port',
-            default_value='/dev/ttyACM2',
+            default_value='/dev/ttyACM0',
             description='Arduino serial port. Enumeration-order dependent; prefer a '
                         'stable /dev/serial/by-id/... path (see header).',
         ),
