@@ -1,344 +1,203 @@
 # 1811 Vehicle Software
 
-> **Architecture note:** 1811 runs on **two on-board computers** — the Karbon 800
-> (Ouster lidar + Arduino) and the Jetson Orin (4× ZED X cameras + most fusion/ROS
-> work), joined by an Ethernet link into one ROS 2 graph. Read
+ROS 2 Humble stack for the 1811 vehicle, running entirely in Docker.
+
+> **Architecture:** 1811 runs on **two on-board computers** — the Karbon 800
+> (Ouster lidar + Arduino) and the Jetson Orin (4× ZED X cameras + most
+> fusion work), joined by Ethernet into one ROS 2 graph. Read
 > [`docs/compute_and_sensor_topology.md`](docs/compute_and_sensor_topology.md)
 > before wiring up anything that consumes lidar and camera data together.
 
-## Docker (this is how everything runs now — Karbon, Windows laptop, or any dev machine)
+**Before driving:** [Safety](#safety) — there is no watchdog and no deadman
+switch. A human on the kill switch is the only backstop that exists.
 
-All ROS 2 code in this repo runs inside a Docker container built from `ros:humble`.
-This means:
+---
 
-- **No native ROS 2 install is required on any machine** — not the Karbon
-  (Ubuntu 24.04), not a Windows laptop (via WSL), not a fresh machine.
-- The container brings its own Ubuntu 22.04 / ROS 2 Humble userspace
-  regardless of what the host OS actually is. The host's job is just to run
-  Docker.
-- The same image and the same commands work identically everywhere. Machine
-  differences (Karbon vs. laptop, Linux vs. WSL) only affect a couple of
-  host-level steps below (USB passthrough, display forwarding) — never the
-  ROS/Docker workflow itself.
+## Contents
 
-### First-time setup (any machine)
+- [Quick reference](#quick-reference) — topics, nodes, what's built
+- [Setup](#setup) — first time, on any machine
+- [Daily use](#daily-use) — enter the container, build
+- [Workflows](#workflows) — copy-paste command blocks
+  - [Manual teleop — gamepad](#manual-teleop--gamepad)
+  - [Manual teleop — keyboard](#manual-teleop--keyboard)
+  - [Lidar + odometry](#lidar--odometry)
+  - [Teach and repeat](#teach-and-repeat)
+- [Troubleshooting](#troubleshooting) — symptom → cause → fix
+- [Safety](#safety) and [Known issues](#known-issues)
+- [Machine-specific setup](#machine-specific-setup) — WSL, Karbon
+
+---
+
+## Quick reference
+
+### Data flow
+
+```
+                gamepad_node ─┐
+                              ├─> /vehicle_command ─> serial_bridge_node ─> Arduino
+           pure_pursuit_node ─┘        (VehicleCommand)
+                    ^
+                    │ /odometry
+  Ouster ─> /ouster/points ─> localization (KISS-ICP) ─┬─> route_recorder_node ─> route CSV
+                                                       └─> pure_pursuit_node
+```
+
+**Only `serial_bridge_node` ever opens the serial port.** If the wheels don't
+turn, it is the first thing to check — no other node can move the vehicle.
+
+### Topics
+
+| Topic | Type | Published by | Consumed by |
+|---|---|---|---|
+| `/joy` | `sensor_msgs/Joy` | `joy_node` | `gamepad_node` |
+| `/vehicle_command` | `vehicle_msgs/VehicleCommand` | `gamepad_node`, `keyboard_teleop_node`, `pure_pursuit_node`\* | `serial_bridge_node` |
+| `/vehicle_state` | `vehicle_msgs/VehicleState` | `serial_bridge_node` | — (firmware sends nothing back yet) |
+| `/cmd/auto` | `vehicle_msgs/VehicleCommand` | `pure_pursuit_node` (default) | — (`mode_manager` not built) |
+| `/ouster/points` | `sensor_msgs/PointCloud2` | `ouster_ros` | `localization` |
+| `/odometry` | `nav_msgs/Odometry` | `localization` (KISS-ICP) | `route_recorder_node`, `pure_pursuit_node` |
+
+\* only when launched with `cmd_topic:=/vehicle_command` — see
+[Teach and repeat](#teach-and-repeat).
+
+### Packages
+
+| Package | What it does | Status |
+|---|---|---|
+| `teleop_bridge` | `gamepad_node`, `keyboard_teleop_node`, `serial_bridge_node` | ✅ |
+| `localization` | Lidar odometry, wraps KISS-ICP → `/odometry` | ✅ |
+| `routing` | `route_recorder_node` — record a route while driving | ✅ |
+| `control` | `pure_pursuit_node`, `bicycle_sim_node` | ✅ |
+| `vehicle_msgs` | `VehicleCommand`, `VehicleState`, `Detection` | ✅ |
+| `vehicle_1811_description` | URDF, frames (`base_link` → `os_sensor` → `os_lidar`) | ✅ |
+| `ouster-ros` | Vendored Ouster driver (git submodule) | ✅ |
+| `routing` → `route_publisher` | Saved route → live `/planning/path` | ❌ not built |
+| `guardian` → `mode_manager` | Manual/auto arbitration + deadman | ❌ not built |
+| `lidar_perception`, `camera_perception`, `sensor_fusion` | — | ❌ empty skeletons |
+
+Each package has its own README with the details:
+[`control`](ros2_ws/src/control/README.md),
+[`routing`](ros2_ws/src/routing/README.md),
+[`localization`](ros2_ws/src/localization/README.md),
+[`vehicle_1811_description`](ros2_ws/src/vehicle_1811_description/README.md).
+
+---
+
+## Setup
+
+Everything runs inside a Docker container built from `ros:humble`. **No native
+ROS 2 install is needed on any machine** — not the Karbon (Ubuntu 24.04), not a
+Windows laptop (via WSL). The container brings its own Ubuntu 22.04 / Humble
+userspace; the host just runs Docker.
 
 ```bash
 git clone git@github.com:yourorg/1811.git
 cd 1811
-bash scripts/setup_machine.sh   # installs/checks Docker, builds the image
+git submodule update --init --recursive
+bash scripts/setup_machine.sh
 ```
 
-### Daily use
+`setup_machine.sh` handles host-level prerequisites (Docker itself) and builds
+the image. The submodule step fetches `ouster-ros` and its nested `ouster-sdk`.
 
-```bash
-docker compose run --rm dev bash
-```
-
-This drops you into a shell **inside the container**, with:
-- the repo bind-mounted at `/vehicle_1811` (edits on the host are reflected
-  instantly, no rebuild needed),
-- `/dev` passed through (so serial/USB devices appear exactly as they do on
-  the host),
-- your display forwarded (so the teleop pygame window can open).
-
-ROS 2 and the workspace are sourced automatically when the container shell
-starts. If you ever need to do it by hand (e.g. inside a script, or a shell
-that skipped the automatic sourcing):
-
-```bash
-source /opt/ros/humble/setup.bash
-source /vehicle_1811/ros2_ws/install/setup.bash
-```
-
-### Building the workspace after code changes
-
-Same as before, just run **inside the container** now:
-
-```bash
-cd /vehicle_1811/ros2_ws
-colcon build --symlink-install
-source install/setup.bash
-```
-
-Run this again any time you edit C++ code, add/remove a package, or change
-`package.xml` / `CMakeLists.txt`. Pure-Python changes take effect immediately
-(no rebuild needed) as long as `--symlink-install` was used.
-
-You do **not** need to rebuild the Docker image itself for code changes —
-only for changes to system/apt/pip dependencies (i.e. edits to the
-`Dockerfile`).
-
-### docker-compose services
-
-- **`dev`** — generic development container. Used on the Karbon, on laptops,
-  anywhere. Bind-mounts the repo, passes through `/dev`, forwards `DISPLAY`.
-- **`obc`** — same image, same setup, intended specifically for the Karbon
-  running as the actual on-board computer. Exists as its own service mainly
-  so Karbon-specific overrides (a fixed serial port path, autostart behavior,
-  etc.) have somewhere to live later without touching the shared `dev`
-  service.
-
-`docker-compose.yml` (repo root):
-
-```yaml
-version: "3.8"
-name: vehicle_1811
-services:
-  dev:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: vehicle_1811
-    container_name: vehicle_1811_dev_${USER}
-    privileged: true
-    stdin_open: true
-    tty: true
-    network_mode: "host"
-    volumes:
-      - type: bind
-        source: $PWD
-        target: /vehicle_1811
-      - type: bind
-        source: /dev
-        target: /dev
-      - type: bind
-        source: /tmp/.X11-unix
-        target: /tmp/.X11-unix
-      - type: bind
-        source: ${HOME}/.Xauthority
-        target: /root/.Xauthority
-    environment:
-      - DISPLAY=${DISPLAY}
-      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
-      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-
-  obc:
-    extends: dev
-    container_name: vehicle_1811_obc
-```
-
-`privileged: true` gives the container full device access, which is why you
-won't need to fuss with `dialout` group permissions *inside* the container —
-it already has access to whatever the host exposes to it.
-
-### Serial / USB devices inside the container
-
-Because `/dev` is bind-mounted wholesale, `/dev/ttyACM0` (or whatever the
-Arduino enumerates as) is visible inside the container exactly as it is on
-the host — same name, same behavior.
-
-- **On the Karbon:** plug in the Arduino, confirm the name with
-  `ls /dev/ttyACM*` on the host, and it's already visible inside the
-  container — no extra step.
-- **On a Windows laptop (WSL):** you still need the `usbipd` steps below to
-  get the device into WSL *first*. Docker Desktop's WSL2 backend only sees
-  devices that WSL itself can see — it does not talk to Windows USB directly.
-  Once `usbipd attach` succeeds and `ls /dev/ttyACM*` works from a plain WSL
-  shell, it will also show up inside the container without any extra
-  binding — the `/dev` bind-mount is live, not a snapshot, so devices that
-  appear after the container has already started are picked up
-  automatically (no need to restart `docker compose run`).
-
-### GUI apps (teleop pygame window) inside the container
-
-- **On the Karbon:** works via the standard X11 `DISPLAY` +
-  `/tmp/.X11-unix` bind already wired into the compose file above.
-- **On a Windows laptop (WSL):** requires WSLg (see WSL-specific setup
-  below). Confirm `echo $DISPLAY` is non-empty in a **plain WSL shell**
-  first — if it's empty there, it'll be empty inside the container too,
-  since the container just inherits whatever `$DISPLAY` the host WSL shell
-  had when you ran `docker compose run`.
+On WSL, do the [usbipd steps](#wsl-windows-laptop) before expecting any USB
+device to show up.
 
 ---
 
-## Running the Ouster lidar driver
+## Daily use
 
-The Ouster ROS 2 driver (`ouster_ros` / `ouster_sensor_msgs`) is vendored as a
-git submodule at `ros2_ws/src/ouster-ros` (upstream `ros2` branch), not
-hand-written code in this repo. After cloning or pulling changes that touch
-it, fetch the submodule (and its own nested `ouster-sdk` submodule):
+Start the container once:
 
 ```bash
-git submodule update --init --recursive
+docker compose up -d dev
 ```
 
-The image now includes the driver's build dependencies (`libeigen3-dev`,
-`libjsoncpp-dev`, `libspdlog-dev`, `libcurl4-openssl-dev`, `libopencv-dev`,
-`libzip-dev`, `libssl-dev`, `ros-humble-tf2-eigen`, `ros-humble-rviz2`), so a
-normal workspace build picks it up:
+Then open a shell in it — **once per terminal you need**:
 
 ```bash
-cd /vehicle_1811/ros2_ws
-colcon build --symlink-install
-source install/setup.bash
+docker compose exec dev bash
 ```
 
-`ouster_ros`'s `CMakeLists.txt` (and the nested `ouster-sdk`'s `ouster_client`)
-`find_package(... REQUIRED)` for OpenCV, libzip, and OpenSSL — if any of those
-three ever go missing again after a Dockerfile edit, colcon fails with a
-`CMake Error` naming exactly which one, and `Dockerfile` needs the matching
-apt package added back.
+> **Prefer `exec` over `run` for extra terminals.** Each `docker compose run`
+> creates a *separate container*, and separate containers are what make DDS
+> participant GUIDs collide (see [Known issues](#known-issues)). One container
+> with many `exec` shells has one PID space and one DDS participant pool — and
+> it starts faster. `docker compose run --rm dev bash` still works for a
+> throwaway one-off.
 
-Connect to the sensor (host networking is already on via `docker-compose.yml`,
-which the driver needs for UDP lidar/IMU packets):
+That's the whole thing — **no `cd`, no `source`.** Every shell opens already
+`cd`'d into `/vehicle_1811/ros2_ws` with ROS 2 *and* the built workspace overlay
+sourced, so `ros2 launch ...` works on the first line you type. The repo is
+bind-mounted at `/vehicle_1811`, `/dev` is passed through, and `DISPLAY` is
+forwarded.
+
+If the workspace hasn't been built yet, the shell says so on open instead of
+failing later with a confusing "package not found."
+
+Build after code changes — there's an alias for it:
 
 ```bash
-ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip-or-hostname>
+rebuild
 ```
 
-On a machine with no display attached (e.g. the Karbon with no monitor), pass
-`viz:=false` — the launch file starts `rviz2` by default and it will crash
-with "no Qt platform plugin could be initialized" if there's no X11 display:
+That expands to `colcon build --symlink-install && source install/setup.bash`.
+When you only touched one or two packages, skip the alias and select them:
 
 ```bash
-ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip-or-hostname> viz:=false
+colcon build --symlink-install --packages-select control routing teleop_bridge && source install/setup.bash
 ```
 
-This publishes point clouds to `/ouster/points` and IMU data to `/ouster/imu`.
-Verify with:
+- Pure-Python edits take effect immediately with `--symlink-install` — no rebuild.
+- Rebuild for C++ changes, new/removed packages, or `package.xml` / `CMakeLists.txt` edits.
+- Rebuild the **Docker image** only for `Dockerfile` changes (apt/pip deps, or the
+  shell setup above):
+  ```bash
+  docker compose build
+  ```
 
-```bash
-ros2 topic hz /ouster/points
-rviz2   # or: ros2 launch ouster_ros rviz.launch.xml
-```
+---
 
-Note: `lidar_perception` (this repo's own package) has no source yet — it's
-an empty skeleton. This driver is a separate, independent package; nothing in
-`lidar_perception` consumes its output yet.
+## Workflows
 
-### UDP receive buffer warning
+Every command below runs **inside the container**. Each numbered terminal is its
+own `docker compose exec dev bash` — see [Daily use](#daily-use) for why `exec`
+rather than a fresh `run` container per terminal.
 
-The driver logs `Failed to set desired SO_RCVBUF size to 1048576` if the
-host's kernel UDP buffer ceiling is below 1 MB — this is a host `sysctl`
-limit, not a container/driver issue (harmless at low data rates, but risks
-dropped lidar packets under sustained load). Fix on the host:
+### Manual teleop — gamepad
 
-```bash
-sudo sysctl -w net.core.rmem_max=1048576
-sudo sysctl -w net.core.rmem_default=1048576
-```
-
-To persist across reboots:
-
-```bash
-echo -e "net.core.rmem_max=1048576\nnet.core.rmem_default=1048576" | sudo tee /etc/sysctl.d/99-ouster.conf
-sudo sysctl --system
-```
-
-## Serial protocol (Karbon <-> Arduino)
-
-JSON, newline-terminated, **57600 baud**.
-
-**Karbon -> Arduino:**
-```json
-{"speed": 2.500, "steering": -0.200, "braking": 0.000}
-```
-- `speed`: target speed in **mph** (not normalized — this is an actual speed value)
-- `steering`: -1.0 .. 1.0
-- `braking`: 0.0 .. 1.0
-
-The Arduino currently does **not** send anything back — this link is command-only
-for now.
-
-## Running teleop (keyboard, no gamepad required)
-
-Run all of the following **inside the Docker container**
-(`docker compose run --rm dev bash`) — not directly on the host.
-
-Requires a display: WSL users, confirm `echo $DISPLAY` is non-empty in a
-plain WSL shell before entering the container (`wsl --update` / restart WSL
-if empty — WSLg is required for the pygame window to appear).
-
-**Terminal 1 — serial bridge** (each terminal enters its own container shell
-via `docker compose run --rm dev bash`; ROS and the workspace are already
-sourced automatically):
-```bash
-ros2 run teleop_bridge serial_bridge_node --ros-args -p port:=/dev/ttyACM0 -p baud:=57600
-```
-Check `ls /dev/ttyACM*` first — the device name can change between replugs.
-
-**Terminal 2 — keyboard teleop:**
-```bash
-ros2 run teleop_bridge keyboard_teleop_node
-```
-Click into the pygame window (not the terminal) for it to receive keys.
-- Arrows: drive (throttle / steer)
-- Shift: brake (overrides throttle)
-- +/-: adjust speed scale
-- q / Esc: quit
-
-**Terminal 3 (optional) — watch what's being published:**
-```bash
-ros2 topic echo /vehicle_command
-```
-
-## Running teleop (gamepad, once available)
+One command starts `joy_node`, `gamepad_node`, and `serial_bridge_node`:
 
 ```bash
 ros2 launch teleop_bridge teleop_bridge.launch.py
 ```
-Calibrate axis indices first — see comments at the top of
-`teleop_bridge/gamepad_node.py`. Run `ros2 topic echo /joy` and move each
-control individually to confirm which `axes[i]` maps to what before trusting
-the defaults. The joystick device (e.g. `/dev/input/js0`) is passed through
-the same way serial devices are — via the `/dev` bind-mount — so no extra
-container config is needed once it shows up on the host.
 
-## Teach and repeat (record a route, then drive it back autonomously)
-
-Drive a loop once by hand while lidar odometry records it, then have the
-vehicle drive that same loop back on its own. Full design rationale in
-[`docs/teach_and_repeat_guide.md`](docs/teach_and_repeat_guide.md) /
-[`docs/teach_and_repeat_plan.md`](docs/teach_and_repeat_plan.md) — this
-section is the condensed, ties-it-all-together how-to.
-
-### What's built vs. not
-
-| Piece | Package | Status |
-|---|---|---|
-| Lidar odometry (`/odometry`) | `localization` (wraps KISS-ICP) | ✅ built |
-| Record a route while driving manually | `routing` (`route_recorder_node`) | ✅ built |
-| Republish a saved route as `/planning/path` | `routing` (`route_publisher`) | ❌ not built — not needed for a first cycle, see below |
-| Drive a route autonomously | `control` (`pure_pursuit_node`) | ✅ built |
-| Arbitrate manual/autonomous, deadman switch | `guardian` (`mode_manager`) | ❌ not built |
-| Arduino brakes on a stale/dead command stream | firmware | ❌ **not enabled** — see [Known issues](#known-issues--things-to-watch) |
-
-### ⚠️ Read this before running REPEAT (autonomous) on real hardware
-
-Autonomous driving today has **no automatic safety backstop of any kind**:
-
-- **No firmware watchdog.** `checkStaleness()` exists in the Arduino code but
-  isn't enabled. If the command stream stops for *any* reason —
-  `pure_pursuit_node` crashing, `serial_bridge_node` dying, a network
-  hiccup — the firmware keeps executing the **last command it received,
-  forever**. It does not brake on its own.
-- **No `mode_manager`, no deadman switch.** Nothing requires a held button
-  to keep the vehicle driving autonomously, and nothing arbitrates between
-  manual and autonomous commands.
-- `pure_pursuit_node`'s own internal safety net (publishes zero throttle if
-  its path hasn't loaded or `/odometry` goes stale) only protects against
-  *those two specific failures*, and only while `pure_pursuit_node` itself
-  is still alive. It cannot protect you from the process dying outright or
-  the link to `serial_bridge_node` breaking.
-
-**A human at the kill switch is the only thing standing in for the missing
-watchdog and the missing deadman.** Treat every REPEAT run as "manual
-driving with a robot doing the steering," never as something to walk away
-from. Wheels off the ground for the first run of anything new; spotter
-present; start slow.
-
-### The cycle
+The serial port is auto-detected via `/dev/serial/by-id/`. To override:
 
 ```bash
-docker compose run --rm dev bash
-cd /vehicle_1811/ros2_ws
-colcon build --packages-select routing control
-source install/setup.bash
+ros2 launch teleop_bridge teleop_bridge.launch.py port:=/dev/ttyACM0
 ```
 
-**Terminal 1 — lidar:**
+Controls — 8BitDo SN30 Pro, **wired**, measured on this pad:
+
+| Axis | Control | Sign | Used as |
+|---|---|---|---|
+| `axes[0]` | left stick X | right = **negative** | — |
+| `axes[1]` | left stick Y | up = **positive** | throttle |
+| `axes[2]` | left trigger | rests **+1.0**, → −1.0 pressed | brake |
+| `axes[3]` | right stick X | right = **negative** | steering |
+| `axes[4]` | right stick Y | up = **positive** | — |
+
+`INVERT_STEER = True` because right reads negative on `axes[3]`; `INVERT_THROTTLE
+= False` because up already reads positive on `axes[1]`.
+
+**Axis numbers depend on the pad's mode, which is selected by a button combo at
+power-on — not by the cable.** Over Bluetooth this pad reported steering on
+`axes[2]` and the trigger on `axes[5]`. Re-verify after any power-cycle into
+another mode, a pad swap, or a repair:
+
 ```bash
+<<<<<<< HEAD
 ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=169.254.148.80 viz:=false udp_profile_lidar:=LEGACY
 ```
 
@@ -348,18 +207,91 @@ ros2 launch vehicle_1811_description description.launch.py
 ```
 
 **Terminal 3 — odometry (do not restart this until REPEAT is completely done):**
+=======
+ros2 topic echo /joy
+```
+
+Move one control at a time and confirm against the table above and the constants
+in [`gamepad_node.py`](ros2_ws/src/teleop_bridge/teleop_bridge/gamepad_node.py).
+`gamepad_node` refuses to publish (and logs why) if `/joy` arrives with fewer
+axes than it reads, rather than dying mid-drive.
+
+### Manual teleop — keyboard
+
+**Terminal 1** — serial bridge:
+
+```bash
+ros2 launch teleop_bridge teleop_bridge.launch.py use_gamepad:=false
+```
+
+**Terminal 2** — keyboard teleop:
+
+```bash
+ros2 run teleop_bridge keyboard_teleop_node
+```
+
+Click into the **pygame window** (not the terminal) for it to receive keys.
+Arrows drive, Shift brakes (overrides throttle), `+`/`-` adjust speed scale,
+`q`/`Esc` quits. Requires a display — see [GUI apps](#gui-apps-pygame-window).
+
+### Lidar + odometry
+
+**Terminal 1** — Ouster driver. `viz:=false` matters on the Karbon (no monitor;
+`rviz2` crashes without X11). `udp_profile_lidar:=LEGACY` works around the
+firmware 3.0.1 bug — see [Known issues](#known-issues):
+
+```bash
+ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip> viz:=false udp_profile_lidar:=LEGACY
+```
+
+**Terminal 2** — odometry:
+
+>>>>>>> 4beb8fbacf677a7e9476e54ee3d4a4acb8fdf48a
 ```bash
 ros2 launch localization localization.launch.py
 ```
-Restarting this between TEACH and REPEAT moves the `odom` frame's origin —
-the recorded route silently stops matching reality, with no error. See
-`routing`'s README for why.
 
+<<<<<<< HEAD
 **Terminal 4 — TEACH: start recording:**
+=======
+Verify:
+
+```bash
+ros2 topic hz /odometry
+```
+
+### Teach and repeat
+
+Drive a loop by hand while lidar odometry records it, then drive it back
+autonomously.
+
+> **⚠️ Read [Safety](#safety) before the REPEAT step.** There is no watchdog
+> and no deadman switch. Also see [Known issues](#known-issues) — the goal check
+> currently trips immediately on a closed loop, so REPEAT does not yet work on a
+> route that ends where it started.
+
+**Terminal 1** — lidar:
+
+```bash
+ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip> viz:=false udp_profile_lidar:=LEGACY
+```
+
+**Terminal 2** — odometry. **Do not restart this until REPEAT is completely
+done.** Restarting moves the `odom` frame origin and the recorded route
+silently stops matching reality, with no error:
+
+```bash
+ros2 launch localization localization.launch.py
+```
+
+**Terminal 3** — start recording:
+
+>>>>>>> 4beb8fbacf677a7e9476e54ee3d4a4acb8fdf48a
 ```bash
 ros2 launch routing route_recorder.launch.py
 ```
 
+<<<<<<< HEAD
 **Terminals 5+ — actually drive the car.** `route_recorder_node` only
 *listens* to `/odometry`; nothing about it moves the vehicle. You still
 need the full teleop chain running, same as any other manual drive —
@@ -367,123 +299,292 @@ need the full teleop chain running, same as any other manual drive —
 so without it the wheels won't turn no matter what `gamepad_node` publishes.
 Gamepad (one command, starts `joy_node` + `gamepad_node` + `serial_bridge_node`
 together):
+=======
+**Terminal 4** — TEACH: drive the loop by hand. `route_recorder_node` only
+*listens* to `/odometry`; it does not move anything:
+
+>>>>>>> 4beb8fbacf677a7e9476e54ee3d4a4acb8fdf48a
 ```bash
 ros2 launch teleop_bridge teleop_bridge.launch.py
 ```
-or keyboard (two terminals — see "Running teleop (keyboard...)" above for
-the full breakdown):
-```bash
-ros2 run teleop_bridge serial_bridge_node --ros-args -p port:=/dev/ttyACM0 -p baud:=57600
-ros2 run teleop_bridge keyboard_teleop_node
-```
-Drive the loop back to your starting spot.
 
+<<<<<<< HEAD
 **Back in terminal 4 — save the route:**
+=======
+Drive the loop, back to your starting spot.
+
+**Terminal 3** — save the route. Prints the file path you need next:
+
+>>>>>>> 4beb8fbacf677a7e9476e54ee3d4a4acb8fdf48a
 ```bash
 ros2 service call /route_recorder_node/save std_srvs/srv/Trigger {}
 ```
-This prints the saved file path (also logged by the node) — you'll need it
-for the next step. See `routing`'s README for exactly where this file lands
-and why, and for how to view a saved CSV from inside the container
-(`ls -la` / `cat` on `/vehicle_1811/routes/`).
 
-**REPEAT — safe first step, nothing moves, just watch the output:**
+**Terminal 4** — now `Ctrl-C` the gamepad teleop and restart it **without the
+gamepad**, so nothing competes with `pure_pursuit_node` for `/vehicle_command`:
+
+```bash
+ros2 launch teleop_bridge teleop_bridge.launch.py use_gamepad:=false
+```
+
+**Terminal 5** — REPEAT, dry run first. Default `cmd_topic` is `/cmd/auto`,
+which nothing subscribes to — **nothing moves**, this is pure observation:
+
 ```bash
 ros2 launch control pure_pursuit.launch.py path_file:=/vehicle_1811/routes/route_<timestamp>.csv
+```
+
+**Terminal 6** — watch the output. Push the car by hand and confirm the steer
+and throttle values track sensibly:
+
+```bash
 ros2 topic echo /cmd/auto
 ```
-`pure_pursuit_node` publishes to `/cmd/auto` by default, which nothing
-subscribes to yet (`mode_manager` isn't built) — so this step is pure
-observation. Confirm the steer/throttle values look sane as you push the
-car by hand before ever wiring output to the Arduino.
 
-**REPEAT — only once the above looks right, *and* you've re-read the
-warning above:**
+**Terminal 5** — REPEAT for real, only once the above looks right *and* you've
+read [Safety](#safety). This sends straight to the Arduino:
+
 ```bash
-ros2 launch control pure_pursuit.launch.py cmd_topic:=/vehicle_command \
-    path_file:=/vehicle_1811/routes/route_<timestamp>.csv
+ros2 launch control pure_pursuit.launch.py cmd_topic:=/vehicle_command path_file:=/vehicle_1811/routes/route_<timestamp>.csv
 ```
-See `control`'s README, "Bench test through serial_bridge," for the full
-pre-flight checklist before doing this on the ground.
 
-### Not built yet
+See [`control`'s README](ros2_ws/src/control/README.md), "Bench test through
+serial_bridge," for the full pre-flight checklist.
 
-`route_publisher` (turns a saved route into a live `/planning/path` topic —
-`pure_pursuit_node`'s `path_file` param sidesteps needing this for a first
-cycle), `mode_manager` (deadman-gated manual/autonomous arbitration), and
-enabling the firmware's `checkStaleness()` watchdog. The last one is a real
-prerequisite gap, not just a nice-to-have — see the warning above.
+**No hardware at all?** `pure_pursuit_node` runs closed-loop against a
+simulated bicycle model, using the bundled sample route:
 
-## WSL-specific setup (if running on a laptop instead of the Karbon)
+```bash
+ros2 launch control pure_pursuit.launch.py use_sim:=true
+```
 
-USB devices plugged into Windows aren't visible to WSL (or to Docker Desktop,
-which runs on top of WSL) by default.
+---
+
+## Troubleshooting
+
+### The vehicle doesn't move, but `/vehicle_command` echoes fine
+
+The graph is healthy and the break is at the serial leg. Check that anything is
+actually subscribed:
+
+```bash
+ros2 topic info /vehicle_command --verbose
+```
+
+Subscriber count `0` means `serial_bridge_node` is dead or never started. Under
+`ros2 launch`, a node that dies at startup prints one `process has died` line
+that scrolls past while the others keep running — everything *looks* alive.
+Confirm:
+
+```bash
+ros2 node list
+```
+
+`serial_bridge_node` logs the port it opened at startup, and logs
+`SERIAL BRIDGE DID NOT START` (with the available devices listed) if it
+couldn't. Check the host's view of the devices:
+
+```bash
+ls -l /dev/serial/by-id/
+```
+
+### Throttle is always 0 in `/vehicle_command`
+
+The brake trigger is being read as pressed. If `TRIGGER_RESTS_AT_PLUS_ONE` in
+[`gamepad_node.py`](ros2_ws/src/teleop_bridge/teleop_bridge/gamepad_node.py) is
+wrong for your connection, brake sits at ~0.5 at rest and throttle is forced to
+0 forever — the topic still publishes, so it looks fine. Echo `/joy`, read the
+trigger axis **at rest**, and set the constant to match.
+
+### `pure_pursuit_node` says "Goal reached" immediately
+
+Expected, today, for any route that ends near where it started — see
+[Known issues](#known-issues).
+
+### Nodes can't see each other across containers
+
+All containers must agree on `ROS_DOMAIN_ID` (hardcoded to `0` in
+`docker-compose.yml`) and use `network_mode: host`. Check:
+
+```bash
+ros2 topic list
+```
+
+Note `docker-compose.yml` sets `FASTRTPS_DEFAULT_PROFILES_FILE` to
+`/vehicle_1811/config/fastdds_cable.xml`, **but no `config/` directory exists in
+this repo.** Fast DDS falls back to defaults when the file is missing, so this
+is currently harmless — but if that file is ever added with a transport
+whitelist, it will silently break same-host discovery.
+
+### A device doesn't appear inside the container
+
+The `/dev` bind-mount reflects the host **live** — devices that appear after the
+container started are picked up automatically, no restart needed. So if it's not
+there, it wasn't on the host either. Check on the host first, and on WSL re-run
+`usbipd attach` (it does not survive a replug or reboot).
+
+---
+
+## Safety
+
+Autonomous driving today has **no automatic backstop of any kind**:
+
+- **No firmware watchdog.** `checkStaleness()` exists in the Arduino code but
+  isn't enabled. If the command stream stops for *any* reason —
+  `pure_pursuit_node` crashing, `serial_bridge_node` dying, a network hiccup —
+  the firmware keeps executing the **last command it received, forever**. It
+  does not brake on its own.
+- **No `mode_manager`, no deadman switch.** Nothing requires a held button to
+  keep the vehicle driving, and nothing arbitrates manual vs. autonomous
+  commands. That's why REPEAT wants `use_gamepad:=false` — two publishers on
+  `/vehicle_command` means the Arduino acts on whichever message landed last.
+- `pure_pursuit_node`'s internal safety net (zero throttle if the path hasn't
+  loaded or `/odometry` goes stale) covers *only those two failures*, and only
+  while the node is still alive. It cannot help if the process dies outright or
+  the link to `serial_bridge_node` breaks.
+
+**A human at the kill switch is the only thing standing in for the missing
+watchdog and deadman.** Treat every REPEAT run as "manual driving with a robot
+doing the steering," never as something to walk away from. Wheels off the
+ground for the first run of anything new; spotter present; start slow.
+
+---
+
+## Known issues
+
+- **UNRESOLVED: steering went to full lock and stayed there during a TEACH run.**
+  Running `teleop_bridge.launch.py` + `route_recorder.launch.py` only (no
+  `pure_pursuit_node`), the wheels commanded hard right without the stick being
+  touched, and stayed there. Ruled out since: `route_recorder_node` has no
+  publishers and cannot command anything; `pure_pursuit_node` was not running;
+  the gamepad axis mapping was re-measured afterward and is correct. The
+  *sticking* is explained — with no firmware watchdog, the Arduino holds the last
+  command forever, so anything that stops the `/vehicle_command` stream freezes
+  the wheels wherever they were. What produced the full-lock value in the first
+  place is still unknown, but it happened **both times moments after
+  `route_recorder.launch.py` was started in another container** — see the DDS
+  GUID collision entry below, which is the leading hypothesis. Other leads not
+  yet checked: whether the pad was in a different power-on mode during that run,
+  `joy_node` behavior on device disconnect/reconnect, and stick drift.
+  `serial_bridge_node` now clamps to ±1 and logs any out-of-range command, so a
+  repeat should leave evidence in the log.
+- **DDS participant GUID collisions across containers** (leading suspect for the
+  entry above). Fast DDS derives a participant's GUID prefix from a host
+  identifier plus the process id. `network_mode: host` and `ipc: host` already
+  make the host part identical across containers, and without a shared PID
+  namespace each `docker compose run` container numbers processes from 1 — so
+  two containers readily produce the same pid, hence the same GUID prefix.
+  Duplicate GUIDs are undefined behavior in DDS: discovery mis-attributes
+  endpoints and a reader can be matched to a writer on a different topic, which
+  would deliver bytes that were never a `VehicleCommand` into one — arbitrary
+  floats, easily outside ±1. Consistent with both the out-of-range steering and
+  with topics intermittently not crossing containers. **Mitigated** by `pid:
+  "host"` in `docker-compose.yml` (host pids are unique) and by using one
+  container with `docker compose exec` shells instead of many `run` containers.
+  Unconfirmed — see the falsifiable test in that entry.
+- **`pure_pursuit_node` trips its goal check immediately on a closed loop.**
+  The check measures straight-line distance to the *last* waypoint with no
+  notion of progress along the path, so a route ending within `goal_tolerance`
+  (0.3 m) of its start reports "Goal reached" on the first control tick, before
+  moving. **This defeats teach-and-repeat by design** — a taught loop returns
+  to its start. Fix is to gate the goal on path progress (`_last_idx` near the
+  end), not just proximity. See
+  [`pure_pursuit_node.py:156`](ros2_ws/src/control/control/pure_pursuit_node.py:156).
+- **Speed limits disagree.** `control/config/pure_pursuit.yaml` sets
+  `max_speed_mps: 2.2352` (5 mph) with a comment saying it *must* match
+  `serial_bridge_node`'s `MAX_SPEED_MPH` — which is **12.5**. Reconcile these
+  before an autonomous run; the throttle scaling depends on it.
+- **No watchdog on the Arduino.** See [Safety](#safety). Must be enabled and
+  should set `braking = 1.0` (not 0) on timeout.
+- **Ouster driver crashes on sensor firmware < 3.2.0** with
+  `std::out_of_range` / `Field 'WINDOW' not found in LidarScan`. The driver's
+  field layout for `RNG19_RFL8_SIG16_NIR16` always includes a `WINDOW` field
+  that doesn't exist below firmware 3.2 — regardless of `point_type`, since the
+  layout follows `udp_profile_lidar`. Our unit is on 3.0.1. Either upgrade the
+  sensor firmware (real fix) or pass `udp_profile_lidar:=LEGACY` (workaround,
+  costs the newer profile's ambient/reflectivity encoding).
+- **`Failed to set desired SO_RCVBUF size`** from the Ouster driver means the
+  host's UDP buffer ceiling is under 1 MB. Harmless at low rates, risks dropped
+  packets under load. Fix on the **host**, not in the container:
+  ```bash
+  echo -e "net.core.rmem_max=1048576\nnet.core.rmem_default=1048576" | sudo tee /etc/sysctl.d/99-ouster.conf && sudo sysctl --system
+  ```
+- Debug `Serial.println()` calls were removed from the firmware — they polluted
+  the same channel the Python side parses as JSON, causing intermittent parse
+  failures.
+- Earlier firmware drained only one serial line per `loop()`. If commands start
+  lagging or backing up, check the drain-all-buffered-lines fix is still there.
+
+---
+
+## Serial protocol (Karbon ↔ Arduino)
+
+JSON, newline-terminated, **57600 baud**.
+
+**Karbon → Arduino:**
+
+```json
+{"speed": 2.500, "steering": -0.200, "braking": 0.000}
+```
+
+- `speed` — target speed in **mph** (an actual speed, not normalized).
+  `serial_bridge_node` computes it as `throttle × MAX_SPEED_MPH`.
+- `steering` — `-1.0` … `1.0`
+- `braking` — `0.0` … `1.0`
+
+`serial_bridge_node` clamps `throttle`/`steer` to ±1 and `brake` to 0…1 before
+writing, and logs a throttled warning naming the offending value when it has to.
+It is the last thing between a bad command and the hardware, so these ranges are
+enforced there rather than trusted from upstream.
+
+The Arduino currently sends **nothing back**; this link is command-only.
+`serial_bridge_node` parses replies defensively anyway, so enabling telemetry
+later won't require changes on the ROS side.
+
+---
+
+## Machine-specific setup
+
+### GUI apps (pygame window)
+
+- **Karbon:** works via the X11 `DISPLAY` + `/tmp/.X11-unix` bind already in
+  `docker-compose.yml`.
+- **WSL:** requires WSLg. Confirm `echo $DISPLAY` is non-empty in a **plain WSL
+  shell** first — the container inherits whatever `$DISPLAY` the host shell had
+  when you ran `docker compose run`. If it's empty there, it's empty inside.
+
+### WSL (Windows laptop)
+
+USB devices plugged into Windows aren't visible to WSL — or to Docker Desktop,
+which runs on top of WSL — by default. Docker Desktop's WSL2 backend only sees
+what WSL itself sees; it does not talk to Windows USB directly.
 
 **Windows PowerShell (as Administrator):**
+
 ```powershell
 winget install usbipd
 usbipd list
 usbipd bind --busid <busid>
 usbipd attach --wsl --busid <busid>
 ```
-Re-run `attach` after every unplug/replug or reboot.
 
-**In a plain WSL shell**, confirm the device is visible *before* entering the
-container:
-```bash
-ls /dev/ttyACM* /dev/ttyUSB*
-```
+Re-run `attach` after **every** unplug/replug or reboot.
 
-Once that shows the device, it will also be visible inside
-`docker compose run --rm dev bash` automatically.
-
-Also confirm Docker Desktop's WSL integration is enabled for your distro:
-**Docker Desktop → Settings → Resources → WSL Integration** — toggle your
-distro on, then **Apply & Restart** if you change it.
-
-## Setting up on the Karbon (or any fresh machine)
+**In a plain WSL shell**, confirm before entering the container:
 
 ```bash
-git clone git@github.com:yourorg/1811.git
-cd 1811
-bash scripts/setup_machine.sh
-docker compose run --rm dev bash
+ls -l /dev/serial/by-id/ /dev/input/js*
 ```
 
-No native ROS 2 install is needed anywhere in this flow. `scripts/setup_machine.sh`
-only handles host-level prerequisites (Docker itself, plus a couple of
-convenience/fallback steps) — see the script for details.
+Also enable **Docker Desktop → Settings → Resources → WSL Integration** for your
+distro, then **Apply & Restart**.
 
-## Known issues / things to watch
+### docker-compose services
 
-- **No watchdog on the Arduino yet.** If the serial link goes stale, the
-  firmware currently keeps executing the last received command indefinitely.
-  `checkStaleness()` exists in the firmware but must be enabled, and should
-  set `braking = 1.0` (not 0) on timeout. **Do not run this vehicle
-  unsupervised or with wheels on the ground until this is fixed.** This is a
-  firmware-level issue and applies identically whether the ROS side is
-  running natively or inside Docker.
-- Debug `Serial.println()` calls in the firmware were removed — they were
-  polluting the same serial channel the Python side parses as JSON, causing
-  intermittent parse failures.
-- The firmware only drains one line from the serial buffer per `loop()`
-  iteration in earlier versions — if commands start lagging/backing up
-  again, check that the drain-all-buffered-lines fix is still in place.
-- If a device (`/dev/ttyACM0`, `/dev/input/js0`, etc.) doesn't appear inside
-  a container that's already running, it usually means the device wasn't
-  present on the host yet when checked — re-run `ls /dev/ttyACM*` on the
-  host first; the container's `/dev` bind-mount reflects the host live, so
-  there's no need to restart the container once the device is actually there.
-- **Ouster driver crashes with `terminate called after throwing an instance
-  of 'std::out_of_range'` / `Field 'WINDOW' not found in LidarScan` on
-  sensors running firmware older than 3.2.0.** The driver's point-cloud field
-  layout for the `RNG19_RFL8_SIG16_NIR16` profile always includes a `WINDOW`
-  (window-blockage) field, but that field doesn't exist in the sensor's
-  actual data below firmware 3.2 — this happens regardless of which
-  `point_type` is selected, since the field layout is chosen by
-  `udp_profile_lidar`, not `point_type`. Our unit at the Karbon is on
-  firmware 3.0.1 and hits this. Two options: upgrade the sensor firmware to
-  3.2+ (real fix), or add `udp_profile_lidar:=LEGACY` to the launch command
-  as a workaround — the `LEGACY` profile's field layout doesn't reference
-  `WINDOW` and is supported by all firmware versions, at the cost of losing
-  the newer profile's ambient/reflectivity encoding.
+- **`dev`** — generic development container. Used everywhere.
+- **`obc`** — same image and setup, intended for the Karbon as the actual
+  on-board computer. Exists as its own service so Karbon-specific overrides
+  (fixed serial path, autostart) have somewhere to live without touching `dev`.
+
+`privileged: true` gives full device access, which is why you don't need to
+fuss with `dialout` group permissions inside the container.

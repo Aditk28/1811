@@ -95,6 +95,21 @@ def yaw_from_quaternion(q) -> float:
     return math.atan2(siny_cosp, cosy_cosp)
 
 
+def is_near_path_end(idx: int, path_len: int, margin: int = 1) -> bool:
+    """True once the forward-search index has actually reached the tail of
+    the path (within `margin` points of the last one).
+
+    Goal detection must require this, not just spatial distance to the
+    final waypoint -- a loop-shaped route's last waypoint sits close to its
+    first one, so a vehicle starting REPEAT from the same spot TEACH just
+    ended (the documented workflow: no restart between them) would
+    otherwise already be "at the goal" before ever following the path.
+    Requiring the index to have actually walked to the end forces genuine
+    progress, not just spatial coincidence.
+    """
+    return idx >= path_len - 1 - margin
+
+
 def closest_index(path: Sequence[Waypoint], pose: Point, start_idx: int, window: int = 25) -> int:
     """Index of the path point closest to `pose`, searched forward only.
 

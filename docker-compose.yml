@@ -12,6 +12,20 @@ services:
     tty: true
     network_mode: "host"
     ipc: "host"
+    # Share the host PID namespace so every container sees one PID space.
+    #
+    # Without this, each `docker compose run` container numbers its processes
+    # from 1, so two containers routinely hand out the SAME pid (a launch in
+    # each easily lands on pid 8). Fast DDS builds a participant's GUID prefix
+    # from a host identifier plus the process id -- and with network_mode+ipc
+    # already shared, the host part matches too. Two participants with the same
+    # GUID is undefined behavior in DDS: discovery gets confused about who owns
+    # which endpoint, and readers can be matched to the wrong writer.
+    #
+    # Symptoms are exactly the kind that look random: topics that don't cross
+    # containers, and readers delivering data that was never written to their
+    # topic. Host PIDs are unique, so the prefixes stay distinct.
+    pid: "host"
     volumes:
       - type: bind
         source: $PWD

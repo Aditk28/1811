@@ -34,11 +34,14 @@ class PurePursuitNode(Node):
         super().__init__('pure_pursuit_node')
 
         # m, base Ld
-        self.declare_parameter('lookahead_distance', 1.0)
+        self.declare_parameter('lookahead_distance', 0.25)
         # m per m/s of speed; 0 = fixed Ld (fixed oscillates low-speed, cuts corners high-speed)
         self.declare_parameter('lookahead_speed_gain', 0.0)
-        self.declare_parameter('min_lookahead', 0.6)             # m
+        # m -- must stay <= lookahead_distance or it silently overrides it via the clamp
+        self.declare_parameter('min_lookahead', 0.2)
         self.declare_parameter('max_lookahead', 3.0)             # m
+        # points; how far ahead of last_idx closest_index searches each tick
+        self.declare_parameter('closest_index_window', 5)
         # m -- measured, vehicle_1811_description/urdf/vehicle_1811.urdf.xacro
         self.declare_parameter('wheelbase', 0.937)
         # rad -- TODO-MEASURE off the chassis, see README
@@ -65,6 +68,7 @@ class PurePursuitNode(Node):
         self._lookahead_gain = p('lookahead_speed_gain').value
         self._min_lookahead = p('min_lookahead').value
         self._max_lookahead = p('max_lookahead').value
+        self._closest_index_window = p('closest_index_window').value
         self._wheelbase = p('wheelbase').value
         self._max_steer_angle = p('max_steer_angle').value
         self._steer_sign = p('steer_sign').value
@@ -153,16 +157,23 @@ class PurePursuitNode(Node):
         x, y, yaw, speed = self._last_odom
         pose = (x, y)
 
+        # Advance path-progress first -- goal detection needs it below, not
+        # just raw distance (see is_near_path_end's docstring: a loop route's
+        # last waypoint sits near its first one, so starting REPEAT from
+        # wherever TEACH just ended would otherwise look like an instant
+        # arrival before the vehicle has moved at all).
+        self._last_idx = ppc.closest_index(
+            self._path, pose, self._last_idx, window=self._closest_index_window)
+
         goal_dist = ppc.distance(pose, self._path[-1].xy)
-        if goal_dist <= self._goal_tolerance:
+        near_end = ppc.is_near_path_end(self._last_idx, len(self._path))
+        if near_end and goal_dist <= self._goal_tolerance:
             if not self._goal_reached:
                 self.get_logger().info(
                     f'Goal reached (within {self._goal_tolerance} m) -- stopping')
                 self._goal_reached = True
             self._publish_zero()
             return
-
-        self._last_idx = ppc.closest_index(self._path, pose, self._last_idx)
 
         lookahead_dist = ppc.scaled_lookahead(
             speed, self._lookahead_base, self._lookahead_gain,

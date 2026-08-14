@@ -2,10 +2,11 @@
 # placeholders, not measurements -- see README.md before driving for real.
 /**:
   ros__parameters:
-    lookahead_distance: 1.0        # m -- base Ld; tune on blocks first
+    lookahead_distance: 0.25       # m -- base Ld; tune on blocks first
     lookahead_speed_gain: 0.0      # m per m/s of speed; 0 = fixed Ld
-    min_lookahead: 0.6             # m
+    min_lookahead: 0.2             # m -- must stay <= lookahead_distance or it silently wins the clamp
     max_lookahead: 3.0             # m
+    closest_index_window: 5        # points; how far ahead of last_idx to search each tick
     wheelbase: 0.937               # m -- measured, vehicle_1811.urdf.xacro
     max_steer_angle: 0.35          # rad -- TODO-MEASURE off the chassis (see README)
     steer_sign: 1.0                # flip to -1.0 if wheels steer away from the path
