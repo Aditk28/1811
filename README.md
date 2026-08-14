@@ -225,7 +225,28 @@ Arrows drive, Shift brakes (overrides throttle), `+`/`-` adjust speed scale,
 
 ### Lidar + odometry
 
-**Terminal 1** — Ouster driver. `viz:=false` matters on the Karbon (no monitor;
+**Terminal 1** — URDF + TF tree. **Required before odometry**, not optional:
+
+```bash
+ros2 launch vehicle_1811_description description.launch.py
+```
+
+`localization.launch.py` asks KISS-ICP for `base_frame:=base_link` so `/odometry`
+is the *vehicle's* pose, not the sensor's. That conversion needs the
+`base_link → os_sensor → os_lidar` chain, which only exists while
+`robot_state_publisher` is running. Without it the TF tree is just
+`os_sensor → os_lidar/os_imu` with **no `base_link` at all**, and the odometry
+you record is wrong or absent. Confirm the tree before trusting a route:
+
+```bash
+ros2 run tf2_tools view_frames
+```
+
+You want `base_footprint → base_link → os_sensor → os_lidar` plus the wheel and
+camera frames. If you only see `os_sensor` and its children, this launch isn't
+running.
+
+**Terminal 2** — Ouster driver. `viz:=false` matters on the Karbon (no monitor;
 `rviz2` crashes without X11). `udp_profile_lidar:=LEGACY` works around the
 firmware 3.0.1 bug — see [Known issues](#known-issues):
 
@@ -233,7 +254,7 @@ firmware 3.0.1 bug — see [Known issues](#known-issues):
 ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip> viz:=false udp_profile_lidar:=LEGACY
 ```
 
-**Terminal 2** — odometry:
+**Terminal 3** — odometry:
 
 ```bash
 ros2 launch localization localization.launch.py
@@ -255,13 +276,20 @@ autonomously.
 > currently trips immediately on a closed loop, so REPEAT does not yet work on a
 > route that ends where it started.
 
-**Terminal 1** — lidar:
+**Terminal 1** — URDF + TF tree. Must be up before odometry, or `/odometry` has
+no `base_link` to report against (see [Lidar + odometry](#lidar--odometry)):
+
+```bash
+ros2 launch vehicle_1811_description description.launch.py
+```
+
+**Terminal 2** — lidar:
 
 ```bash
 ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=<sensor-ip> viz:=false udp_profile_lidar:=LEGACY
 ```
 
-**Terminal 2** — odometry. **Do not restart this until REPEAT is completely
+**Terminal 3** — odometry. **Do not restart this until REPEAT is completely
 done.** Restarting moves the `odom` frame origin and the recorded route
 silently stops matching reality, with no error:
 
@@ -269,13 +297,13 @@ silently stops matching reality, with no error:
 ros2 launch localization localization.launch.py
 ```
 
-**Terminal 3** — start recording:
+**Terminal 4** — start recording:
 
 ```bash
 ros2 launch routing route_recorder.launch.py
 ```
 
-**Terminal 4** — TEACH: drive the loop by hand. `route_recorder_node` only
+**Terminal 5** — TEACH: drive the loop by hand. `route_recorder_node` only
 *listens* to `/odometry`; it does not move anything:
 
 ```bash
@@ -284,34 +312,34 @@ ros2 launch teleop_bridge teleop_bridge.launch.py
 
 Drive the loop, back to your starting spot.
 
-**Terminal 3** — save the route. Prints the file path you need next:
+**Terminal 4** — save the route. Prints the file path you need next:
 
 ```bash
 ros2 service call /route_recorder_node/save std_srvs/srv/Trigger {}
 ```
 
-**Terminal 4** — now `Ctrl-C` the gamepad teleop and restart it **without the
+**Terminal 5** — now `Ctrl-C` the gamepad teleop and restart it **without the
 gamepad**, so nothing competes with `pure_pursuit_node` for `/vehicle_command`:
 
 ```bash
 ros2 launch teleop_bridge teleop_bridge.launch.py use_gamepad:=false
 ```
 
-**Terminal 5** — REPEAT, dry run first. Default `cmd_topic` is `/cmd/auto`,
+**Terminal 6** — REPEAT, dry run first. Default `cmd_topic` is `/cmd/auto`,
 which nothing subscribes to — **nothing moves**, this is pure observation:
 
 ```bash
 ros2 launch control pure_pursuit.launch.py path_file:=/vehicle_1811/routes/route_<timestamp>.csv
 ```
 
-**Terminal 6** — watch the output. Push the car by hand and confirm the steer
+**Terminal 7** — watch the output. Push the car by hand and confirm the steer
 and throttle values track sensibly:
 
 ```bash
 ros2 topic echo /cmd/auto
 ```
 
-**Terminal 5** — REPEAT for real, only once the above looks right *and* you've
+**Terminal 6** — REPEAT for real, only once the above looks right *and* you've
 read [Safety](#safety). This sends straight to the Arduino:
 
 ```bash
@@ -460,6 +488,29 @@ ground for the first run of anything new; spotter present; start slow.
   to its start. Fix is to gate the goal on path progress (`_last_idx` near the
   end), not just proximity. See
   [`pure_pursuit_node.py:156`](ros2_ws/src/control/control/pure_pursuit_node.py:156).
+- **`lookahead_distance: 0.25` saturates the steering to full lock almost
+  always.** Pure pursuit's curvature is `κ = 2·y_local / Ld²` — **quadratic** in
+  `Ld`, so cutting `Ld` from 1.0 m to 0.25 m multiplies the steering gain by
+  **16×**. With `max_steer_angle: 0.35` and `wheelbase: 0.937`, saturation
+  (`|steer| = 1.0`) happens at:
+
+  | `Ld` | lateral offset to saturate | heading error to saturate |
+  |---|---|---|
+  | 1.0 m | 19.5 cm | 11.2° |
+  | **0.25 m** | **1.2 cm** | **2.8°** |
+
+  A 1.2 cm cross-track error is far below lidar-odometry noise, and the recorded
+  routes themselves wander ~17 cm laterally — **14× the threshold**. So full lock
+  is the *normal* output at this setting, not a fault. `Ld` well under the
+  0.937 m wheelbase is pathological for pure pursuit; use roughly 1–1.5×
+  wheelbase at low speed.
+- **`steer_sign` is unverified against `gamepad_node`.** `pure_pursuit_core`
+  follows REP-103 (`+y` = left, so positive `steer` = **left**), while
+  `gamepad_node` sets `INVERT_STEER = True` specifically to make positive
+  `steer` = **right**. Both publish the same `VehicleCommand.steer` field to the
+  same firmware, so one of them is inverted relative to the other unless
+  `steer_sign` compensates — and it is currently `1.0`, never checked on
+  hardware. Verify with the wheels off the ground before any autonomous run.
 - **Speed limits disagree.** `control/config/pure_pursuit.yaml` sets
   `max_speed_mps: 2.2352` (5 mph) with a comment saying it *must* match
   `serial_bridge_node`'s `MAX_SPEED_MPH` — which is **12.5**. Reconcile these
