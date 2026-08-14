@@ -55,6 +55,22 @@ shipped in the repo. Once it exists:
   in practice wherever this repo is cloned on the Karbon (next to its own
   `docker-compose.yml`).
 
+### Viewing a saved route
+
+From inside the container (any terminal in the same `docker compose run`
+session, or a fresh `docker compose exec dev bash` into the running one):
+
+```bash
+ls -la /vehicle_1811/routes                              # list saved routes, newest last
+cat /vehicle_1811/routes/route_20260814_103000.csv        # dump one route's waypoints
+```
+
+It's a plain CSV (`x,y,yaw` per row, see "Contract" above), so anything that
+reads CSV works too — `column -s, -t < route_....csv` for aligned columns,
+or load it with pandas/Excel on the host copy (same file, no extra step,
+since `/vehicle_1811/routes` is the bind-mounted `routes/` dir above). No
+special ROS tooling needed to just look at one.
+
 ## A full teach-and-repeat cycle, today (no mode_manager, no route_publisher)
 
 ```bash

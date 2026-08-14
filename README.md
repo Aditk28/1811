@@ -379,7 +379,8 @@ ros2 service call /route_recorder_node/save std_srvs/srv/Trigger {}
 ```
 This prints the saved file path (also logged by the node) — you'll need it
 for the next step. See `routing`'s README for exactly where this file lands
-and why.
+and why, and for how to view a saved CSV from inside the container
+(`ls -la` / `cat` on `/vehicle_1811/routes/`).
 
 **REPEAT — safe first step, nothing moves, just watch the output:**
 ```bash
