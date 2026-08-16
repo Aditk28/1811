@@ -30,23 +30,29 @@ const char* FORMAT_STRING = "{\"speed\": %f, \"steering\": %f, \"braking\": %f}"
 // ---------------------------------------------------------------------------
 // STEERING CALIBRATION -- measured on the vehicle
 //
-//   steer = -1.0  ->   583 us  ->  -25 deg
-//   steer =  0.0  ->  1083 us  ->    0 deg
-//   steer = +1.0  ->  1583 us  ->  +25 deg
+//   steer = -1.0  ->   733 us  ->  -25 deg
+//   steer =  0.0  ->  1150 us  ->    0 deg
+//   steer = +1.0  ->  1567 us  ->  +25 deg
 //
-// so: us = 1083.33 + 500 * steer, and 20 us == 1 degree.
+// so: us = 1150.00 + 416.667 * steer, and 16.667 us == 1 degree.
 //
-// This is algebraically identical to the old convertToMicro(105 + 90*angle)
+// This is algebraically identical to the previous convertToMicro(117 + 75*angle)
 // two-step formula, just written so the calibration is visible instead of
 // buried in a 0..360 degree mapping the servo never used.
 //
-// The S350 accepts 0.5-2.5 ms per its datasheet, so 583 us is well in spec.
-// (ServoTimer2's stock MIN_PULSE_WIDTH of 750 was generic hobby-servo
-// conservatism -- the library copy in use here has been lowered to 500.)
+// DO NOT change these without re-measuring axle angle against pulse width. An
+// earlier draft of this file used 1083.33/500 (from a stale 105 + 90*angle
+// version) -- that commands 733-583 = 150 us, or 9 degrees, of extra travel at
+// full left lock, which can drive the linkage into its mechanical stop.
+//
+// The S350 accepts 0.5-2.5 ms per its datasheet, so 733 us is well in spec.
+// ServoTimer2's stock MIN_PULSE_WIDTH is 750 -- just above full left lock,
+// which is why the library copy in use here has been lowered to 500. With the
+// stock library, full left would silently clamp.
 // ---------------------------------------------------------------------------
-const float STEER_CENTER_US = 1083.33f;
-const float STEER_SPAN_US   = 500.0f;   // us per 1.0 of normalized steer
-const float STEER_DEG_FULL  = 25.0f;    // degrees at steer = 1.0
+const float STEER_CENTER_US = 1150.0f;
+const float STEER_SPAN_US   = 416.667f;  // us per 1.0 of normalized steer
+const float STEER_DEG_FULL  = 25.0f;     // degrees at steer = 1.0
 
 const int SERVO_MIN_US = 500;           // Docyke S350 datasheet limits
 const int SERVO_MAX_US = 2500;
